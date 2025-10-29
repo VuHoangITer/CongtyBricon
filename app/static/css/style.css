@@ -1614,7 +1614,7 @@ footer {
   /*background: linear-gradient(135deg, #1a1d20 0%, var(--text-dark) 100%);*/
   background-image:
   linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), /* Overlay tối để text dễ đọc */
-  url('../img/tau.webp'); /* Đường dẫn đến ảnh nền */
+  url('../img/van-chuyen.webp'); /* Đường dẫn đến ảnh nền */
 
   background-size: cover; /* Ảnh phủ kín toàn bộ */
   background-position: center center; /* Căn giữa */

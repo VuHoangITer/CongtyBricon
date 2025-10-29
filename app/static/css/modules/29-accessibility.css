@@ -1,7 +1,7 @@
 /* ==================== ACCESSIBILITY FEATURES ====================
  * File: 29-accessibility.css
  * Auto-generated from style.css
- * Date: 2025-10-27 22:15:18
+ * Date: 2025-10-29 18:39:24
  * ========================================================================== */
 
 /* ==================== ACCESSIBILITY ==================== */
@@ -797,7 +797,7 @@ footer {
   /*background: linear-gradient(135deg, #1a1d20 0%, var(--text-dark) 100%);*/
   background-image:
   linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), /* Overlay tối để text dễ đọc */
-  url('../img/tau.webp'); /* Đường dẫn đến ảnh nền */
+  url('../img/van-chuyen.webp'); /* Đường dẫn đến ảnh nền */
 
   background-size: cover; /* Ảnh phủ kín toàn bộ */
   background-position: center center; /* Căn giữa */
@@ -1032,7 +1032,10 @@ footer .social-links a[aria-label*="Zalo"]:hover {
 
 /* Fanpage Card */
 .fanpage-card {
+  position: relative;
   background-image: url('../img/background-fanpage.webp');
+  background-size: cover;
+  background-position: center;
   border-radius: 10px;
   padding: 0.85rem;
   box-shadow: var(--shadow-sm);
@@ -1040,6 +1043,22 @@ footer .social-links a[aria-label*="Zalo"]:hover {
   margin-left: auto;
   margin-right: auto;
   max-width: 320px;
+  overflow: hidden; /* để lớp tối không tràn */
+}
+
+/* ✅ Thêm đoạn này ngay sau đó */
+.fanpage-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); /* 👈 chỉnh độ tối: 0.2 = hơi mờ, 0.5 = tối hơn */
+  z-index: 0;
+}
+
+/* Giúp nội dung nổi lên trên overlay */
+.fanpage-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .fanpage-card-title {
@@ -3295,199 +3314,188 @@ footer .row:last-child {
 }
 
 /* ==================== RETURN & REFUND POLICY STYLES ==================== */
-.return-policy-section {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #2c3e50;
-  line-height: 1.7;
+/* ==================== CHÍNH SÁCH VN - POLICY PAGE STYLES ====================
+ * Namespace: .chinh-sach-vn
+ * Date: 2025-10-27
+ * ========================================================================== */
+
+.chinh-sach-vn {
+  /* Variables */
+  --policy-primary: #ffc107;
+  --policy-text: #2c3e50;
+  --policy-border: #e8e8e8;
+  --policy-bg-light: #f8f9fa;
+  --policy-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.policy-block {
-  background: var(--bg-white);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  border: 1px solid #e0e0e0;
+/* Sidebar Navigation */
+.chinh-sach-vn .list-group {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--policy-shadow);
 }
 
-.policy-divider {
+.chinh-sach-vn .list-group-item {
   border: none;
-  height: 1px;
-  background: #e0e0e0;
-  margin: 3rem 0;
+  border-bottom: 1px solid var(--policy-border);
+  padding: 1rem 1.25rem;
+  transition: all 0.3s ease;
+  color: var(--policy-text);
+  font-weight: 500;
 }
 
-.policy-header h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid #2c3e50;
-}
-
-.highlight-box {
-  background: var(--bg-light);
-  padding: 1.25rem;
-  margin: 1.5rem 0;
-  border-left: 3px solid #2c3e50;
-}
-
-.highlight-box p {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.policy-intro {
-  background: var(--bg-light);
-  padding: 1rem;
-  margin: 1.5rem 0;
-  font-size: 0.95rem;
-  color: var(--text-body);
-}
-
-.section-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 2rem 0 1rem 0;
-}
-
-.section-title i {
-  margin-right: 0.5rem;
-  font-size: 1rem;
-}
-
-.policy-list,
-.warning-list,
-.sub-list {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-}
-
-.policy-item,
-.warning-item {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.policy-item:last-child,
-.warning-item:last-child {
+.chinh-sach-vn .list-group-item:last-child {
   border-bottom: none;
 }
 
-.sub-list {
-  margin-left: 1.5rem;
-  margin-top: 0.5rem;
+.chinh-sach-vn .list-group-item:hover {
+  background-color: var(--policy-bg-light);
+  padding-left: 1.5rem;
+  color: var(--policy-primary);
 }
 
-.sub-list li {
-  padding: 0.25rem 0;
-  font-size: 0.95rem;
-}
-
-.condition-card {
-  background: #fafafa;
-  padding: 1.25rem;
-  margin: 1rem 0;
-  border: 1px solid #e0e0e0;
-}
-
-.condition-item {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-
-.condition-item i {
-  margin-top: 0.25rem;
-  flex-shrink: 0;
-}
-
-.highlight-text {
+.chinh-sach-vn .list-group-item.active {
+  background: linear-gradient(135deg, var(--policy-primary) 0%, #ffb300 100%);
+  color: #000;
   font-weight: 600;
-  color: #2c3e50;
-  text-decoration: underline;
+  border-left: 4px solid #ff9800;
 }
 
-.cost-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
+/* Policy Content Card */
+.chinh-sach-vn .card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--policy-shadow);
+  border: 1px solid var(--policy-border);
 }
 
-.cost-card {
-  background: #fafafa;
+.chinh-sach-vn .card-header {
+  background: linear-gradient(135deg, var(--policy-primary) 0%, #ffb300 100%) !important;
   padding: 1.5rem;
-  border: 1px solid #e0e0e0;
+  border-bottom: none;
 }
 
-.cost-card h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: #1a1a1a;
-}
-
-.cost-card p {
+.chinh-sach-vn .card-header h3 {
+  color: #000 !important;
+  font-weight: 700;
+  font-size: 1.5rem;
   margin: 0;
-  font-size: 0.95rem;
-  color: var(--text-body);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.refund-cases {
-  margin: 1.5rem 0;
+.chinh-sach-vn .card-body {
+  padding: 2rem;
+  line-height: 1.8;
+  color: var(--policy-text);
 }
 
-.refund-case {
-  padding: 1.25rem;
+/* Typography trong content */
+.chinh-sach-vn .card-body h1,
+.chinh-sach-vn .card-body h2,
+.chinh-sach-vn .card-body h3,
+.chinh-sach-vn .card-body h4 {
+  color: var(--policy-text);
+  font-weight: 600;
+  margin-top: 2rem;
   margin-bottom: 1rem;
-  background: #fafafa;
-  border: 1px solid #e0e0e0;
-  border-left: 3px solid #2c3e50;
 }
 
-.refund-case h4 {
-  font-size: 1rem;
-  font-weight: 600;
+.chinh-sach-vn .card-body h2 {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--policy-primary);
+}
+
+.chinh-sach-vn .card-body h3 {
+  font-size: 1.25rem;
+}
+
+.chinh-sach-vn .card-body p {
+  margin-bottom: 1rem;
+}
+
+.chinh-sach-vn .card-body ul,
+.chinh-sach-vn .card-body ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.chinh-sach-vn .card-body li {
   margin-bottom: 0.5rem;
-  color: #1a1a1a;
 }
 
-.refund-case p {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--text-body);
+.chinh-sach-vn .card-body strong {
+  color: var(--policy-text);
+  font-weight: 600;
 }
 
-.alert-info {
-  border-left: 3px solid #0d6efd;
+/* Contact Box */
+.chinh-sach-vn .bg-light {
+  background-color: var(--policy-bg-light) !important;
+  border-radius: 12px;
+  border: 1px solid var(--policy-border);
 }
 
-.alert-danger {
-  border-left: 3px solid var(--color-danger);
-  background: #fff5f5;
+.chinh-sach-vn .bg-light h5 {
+  color: var(--policy-text);
+  font-weight: 700;
 }
 
-.alert i {
-  margin-right: 0.5rem;
+.chinh-sach-vn .btn-warning {
+  background: linear-gradient(135deg, var(--policy-primary) 0%, #ffb300 100%);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
 }
 
-@media (min-width: 768px) {
-  .policy-block {
-    padding: 2.5rem;
+.chinh-sach-vn .btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.4);
+}
+
+.chinh-sach-vn .btn-outline-warning {
+  border: 2px solid var(--policy-primary);
+  color: var(--policy-text);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.chinh-sach-vn .btn-outline-warning:hover {
+  background: var(--policy-primary);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* Empty State */
+.chinh-sach-vn .text-center .bi-file-earmark-text {
+  color: #cbd5e0;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .chinh-sach-vn .list-group {
+    position: static !important;
+    margin-bottom: 1.5rem;
   }
 
-  .cost-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .chinh-sach-vn .card-body {
+    padding: 1.5rem;
   }
 
-  .return-policy-section {
-    padding: 0;
+  .chinh-sach-vn .card-header h3 {
+    font-size: 1.25rem;
   }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
 
 /* ==================== FILTER SIDEBAR ==================== */

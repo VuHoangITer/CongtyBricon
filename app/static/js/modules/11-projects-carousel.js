@@ -2,7 +2,7 @@
  * ==================== CAROUSEL DỰ ÁN NỔI BẬT ====================
  * File: 11-projects-carousel.js
  * Tạo tự động từ: main.js
- * Ngày tạo: 27/10/2025 22:02:30
+ * Ngày tạo: 29/10/2025 18:39:29
  * ==========================================================================
  * 
 
@@ -16,7 +16,7 @@
            - ✅ MOUSE DRAG: Kéo chuột để chuyển slide (desktop)
            - ✅ TOUCH DRAG: Vuốt ngón tay (mobile)
            - ✅ RUBBER BAND: Hiệu ứng giới hạn khi kéo quá đầu/cuối
-           - ✅ AUTO SLIDE: Tự động chuyển sau 5s
+           - ✅ AUTO SLIDE: Tự động chuyển sau 3s
            - ✅ DOTS NAVIGATION: Click vào dot để jump slide
            - ✅ KEYBOARD: Arrow keys điều khiển
            - ✅ PAUSE ON HOVER: Dừng auto khi hover
@@ -63,7 +63,7 @@
 
   // Configuration
   const config = {
-    autoSlideDelay: 5000,
+    autoSlideDelay: 3000,
     transitionDuration: 600,
     dragThreshold: 50,
   };

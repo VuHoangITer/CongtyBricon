@@ -2,7 +2,7 @@
  * ==================== Khách hàng đánh giá ====================
  * File: 17-customer-review.js
  * Tạo tự động từ: main.js
- * Ngày tạo: 27/10/2025 22:02:30
+ * Ngày tạo: 29/10/2025 18:39:29
  * ==========================================================================
  * 
 
@@ -19,7 +19,7 @@
   const testimonials = window.TestimonialsCarousel;
 
   testimonials.config = {
-    autoSlideDelay: 6000,
+    autoSlideDelay: 4000,
     transitionDuration: 500,
     dragThreshold: 50
   };

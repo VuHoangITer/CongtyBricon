@@ -1,7 +1,7 @@
 /* ==================== FOOTER STYLES ====================
  * File: 18-footer.css
  * Auto-generated from style.css
- * Date: 2025-10-27 22:15:18
+ * Date: 2025-10-29 18:39:24
  * ========================================================================== */
 
 /* ==================== FOOTER ==================== */
@@ -9,7 +9,7 @@ footer {
   /*background: linear-gradient(135deg, #1a1d20 0%, var(--text-dark) 100%);*/
   background-image:
   linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), /* Overlay tối để text dễ đọc */
-  url('../img/tau.webp'); /* Đường dẫn đến ảnh nền */
+  url('../img/van-chuyen.webp'); /* Đường dẫn đến ảnh nền */
 
   background-size: cover; /* Ảnh phủ kín toàn bộ */
   background-position: center center; /* Căn giữa */
@@ -244,7 +244,10 @@ footer .social-links a[aria-label*="Zalo"]:hover {
 
 /* Fanpage Card */
 .fanpage-card {
+  position: relative;
   background-image: url('../img/background-fanpage.webp');
+  background-size: cover;
+  background-position: center;
   border-radius: 10px;
   padding: 0.85rem;
   box-shadow: var(--shadow-sm);
@@ -252,6 +255,22 @@ footer .social-links a[aria-label*="Zalo"]:hover {
   margin-left: auto;
   margin-right: auto;
   max-width: 320px;
+  overflow: hidden; /* để lớp tối không tràn */
+}
+
+/* ✅ Thêm đoạn này ngay sau đó */
+.fanpage-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); /* 👈 chỉnh độ tối: 0.2 = hơi mờ, 0.5 = tối hơn */
+  z-index: 0;
+}
+
+/* Giúp nội dung nổi lên trên overlay */
+.fanpage-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .fanpage-card-title {

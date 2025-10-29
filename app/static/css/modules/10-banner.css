@@ -1,7 +1,7 @@
 /* ==================== BANNER CAROUSEL STYLES ====================
  * File: 10-banner.css
  * Auto-generated from style.css
- * Date: 2025-10-27 22:15:18
+ * Date: 2025-10-29 18:39:24
  * ========================================================================== */
 
 /* ==================== BANNER CAROUSEL ==================== */
@@ -297,7 +297,7 @@
 @media (max-width: 576px) {
   .carousel-item,
   .carousel-item img {
-    height: 350px;
+    height: 520px;
     min-height: 350px;
   }
 
