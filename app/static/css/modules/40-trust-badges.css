@@ -1,22 +1,28 @@
 /* ==================== 4 CÁI Ô VUÔNG TIN TƯỞNG ====================
  * File: 40-trust-badges.css
  * Auto-generated from style.css
- * Date: 2025-10-29 18:39:24
+ * Date: 2025-10-29 21:15:29
  * ========================================================================== */
 
 /* ==================== TRUST BADGES ==================== */
 .trust-badges-section {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  overflow-x: hidden; /* Ngăn tràn ngang */
 }
 
 .trust-badge {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   background: white;
   border-radius: 15px;
   transition: all 0.3s ease;
   height: 100%;
+  min-height: 200px; /* Chiều cao tối thiểu cố định */
   border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .trust-badge:hover {
@@ -26,18 +32,19 @@
 }
 
 .trust-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1rem;
   background: linear-gradient(135deg, var(--brand-primary) 0%, #ffb300 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 2.5rem;
+  font-size: 2rem;
   position: relative;
   animation: float 3s ease-in-out infinite;
+  flex-shrink: 0; /* Icon không bị co lại */
 }
 
 @keyframes float {
@@ -46,16 +53,26 @@
 }
 
 .trust-badge h4 {
-  font-size: 1.2rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem); /* Responsive font size */
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: #2c3e50;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
 }
 
 .trust-badge p {
-  font-size: 0.95rem;
+  font-size: clamp(0.8rem, 2vw, 0.95rem); /* Responsive font size */
   color: #7f8c8d;
   margin: 0;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
 }
 
 /* Stagger animation on scroll */
@@ -70,15 +87,124 @@
   transform: translateY(0);
 }
 
-@media (max-width: 768px) {
+/* Tablet landscape và nhỏ hơn */
+@media (max-width: 991px) {
+  .trust-badge {
+    padding: 1.25rem 0.75rem;
+    min-height: 180px;
+  }
+
   .trust-icon {
     width: 60px;
     height: 60px;
-    font-size: 2rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
   }
 
   .trust-badge h4 {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .trust-badge p {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
   }
 }
 
+/* Mobile và tablet portrait */
+@media (max-width: 768px) {
+  .trust-badges-section {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .trust-badge {
+    padding: 1rem 0.5rem;
+    min-height: 160px;
+  }
+
+  .trust-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .trust-badge h4 {
+    font-size: clamp(0.85rem, 3vw, 1rem);
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+  }
+
+  .trust-badge p {
+    font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+    line-height: 1.3;
+  }
+}
+
+/* Mobile nhỏ (iPhone SE, etc) */
+@media (max-width: 575px) {
+  .trust-badge {
+    padding: 0.85rem 0.4rem;
+    min-height: 145px;
+  }
+
+  .trust-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .trust-badge h4 {
+    font-size: clamp(0.8rem, 3.5vw, 0.95rem);
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+
+  .trust-badge p {
+    font-size: clamp(0.65rem, 2.8vw, 0.8rem);
+    line-height: 1.25;
+  }
+}
+
+/* Mobile rất nhỏ (< 360px) */
+@media (max-width: 359px) {
+  .trust-badge {
+    padding: 0.75rem 0.3rem;
+    min-height: 135px;
+  }
+
+  .trust-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .trust-badge h4 {
+    font-size: 0.75rem;
+    line-height: 1.15;
+    margin-bottom: 0.25rem;
+  }
+
+  .trust-badge p {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+}
+
+/* Màn hình lớn - giữ kích thước đẹp */
+@media (min-width: 1200px) {
+  .trust-badge {
+    padding: 2rem 1.25rem;
+    min-height: 220px;
+  }
+
+  .trust-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+}

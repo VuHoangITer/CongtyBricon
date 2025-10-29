@@ -1,16 +1,21 @@
 /* ==================== PROJECT FILTER BUTTONS ====================
  * File: 25-project-filters.css
  * Auto-generated from style.css
- * Date: 2025-10-29 18:39:24
+ * Date: 2025-10-29 21:15:29
  * ========================================================================== */
 
 /* ==================== PROJECT FILTER BUTTONS ==================== */
+.filter-section {
+  overflow-x: hidden; /* Ngăn tràn ngang */
+}
+
 .project-filters {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
   margin-top: 1.5rem;
+  max-width: 100%; /* Đảm bảo không vượt quá container */
 }
 
 .project-filters .btn {
@@ -52,53 +57,91 @@
   color: var(--text-dark);
   border-color: #dcdcdc;
 }
+
 @media (max-width: 767px) {
+  /* Container căn chỉnh */
+  .filter-section .container {
+    padding-left: 15px; /* Giữ padding Bootstrap mặc định */
+    padding-right: 15px;
+    max-width: 100%;
+    overflow-x: hidden; /* Ngăn tràn */
+  }
+
+  /* Grid layout cho buttons */
   .project-filters .d-flex {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
     width: 100%;
-    margin: 0 auto;
-    padding: 0 0.75rem; /* có khoảng cách hai bên */
+    max-width: 100%; /* Đảm bảo không vượt quá */
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
   }
 
-
-  /* Căn full width trong container Bootstrap */
-  .filter-section .container {
-    padding-left: 0;
-    padding-right: 0;
+  /* Wrapper cho project-filters */
+  .project-filters {
+    margin-top: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   /* Các nút filter */
   .project-filters .btn {
     width: 100%;
-    font-size: 0.85rem;
-    padding: 0.6rem 0.5rem;
-    line-height: 1.3;
+    max-width: 100%; /* Đảm bảo không vượt quá grid cell */
+    font-size: 0.8rem; /* Giảm font size nhẹ */
+    padding: 0.5rem 0.4rem; /* Giảm padding */
+    line-height: 1.2;
     text-align: center;
-    display: flex ;
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 42px;
+    min-height: 40px; /* Giảm min-height */
+    white-space: normal; /* Cho phép xuống dòng nếu cần */
+    word-break: break-word; /* Ngắt từ nếu quá dài */
+    box-sizing: border-box;
   }
 
   /* Icon trong nút */
   .project-filters .btn i {
-    font-size: 0.9rem;
-    margin-right: 0.35rem;
+    font-size: 0.85rem;
+    margin-right: 0.3rem;
+    flex-shrink: 0; /* Icon không bị co lại */
   }
 }
 
 /* Màn rất nhỏ (ví dụ iPhone 5/SE) */
 @media (max-width: 359px) {
+  .filter-section .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .project-filters .d-flex {
-    grid-template-columns: 1fr;
-    padding: 0 0.5rem;
+    grid-template-columns: 1fr; /* 1 cột cho màn hình rất nhỏ */
+    gap: 0.4rem;
   }
 
   .project-filters .btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.3rem;
+    min-height: 38px;
+  }
+
+  .project-filters .btn i {
     font-size: 0.8rem;
+    margin-right: 0.25rem;
+  }
+}
+
+/* Màn hình rất lớn - giới hạn width tối đa */
+@media (min-width: 1400px) {
+  .project-filters {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

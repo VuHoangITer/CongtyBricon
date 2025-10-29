@@ -1,15 +1,20 @@
 /* ==================== LỊCH SỬ PHÁT TRIỂN CỦA CÔNG TY ====================
  * File: 41-lich-su-cong-ty.css
  * Auto-generated from style.css
- * Date: 2025-10-29 18:39:24
+ * Date: 2025-10-29 21:15:29
  * ========================================================================== */
 
 /* ==================== TIMELINE SECTION ==================== */
+.timeline-section {
+  overflow-x: hidden; /* Thêm dòng này để ngăn tràn */
+}
+
 .timeline-container {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem 1rem; /* Thêm padding ngang */
+  overflow-x: hidden; /* Thêm dòng này */
 }
 
 .timeline-container::before {
@@ -27,7 +32,7 @@
 .timeline-item {
   display: flex;
   justify-content: flex-end;
-  padding-right: 50%;
+  padding-right: calc(50% + 10px); /* Thay đổi từ 50% */
   padding-bottom: 4rem;
   position: relative;
   opacity: 0;
@@ -38,7 +43,7 @@
 .timeline-item:nth-child(even) {
   justify-content: flex-start;
   padding-right: 0;
-  padding-left: 50%;
+  padding-left: calc(50% + 10px); /* Thay đổi từ 50% */
   transform: translateX(50px);
 }
 
@@ -71,15 +76,19 @@
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  width: calc(100% - 60px);
-  margin-right: 60px;
+  width: calc(50% - 100px); /* Thay đổi công thức tính */
+  max-width: 100%; /* Thêm dòng này */
   position: relative;
   transition: all 0.3s ease;
 }
 
 .timeline-item:nth-child(even) .timeline-content {
   margin-right: 0;
-  margin-left: 60px;
+  margin-left: 0; /* Bỏ margin cố định */
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-right: 0; /* Bỏ margin cố định */
 }
 
 .timeline-content:hover {
@@ -115,6 +124,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .timeline-container {
+    padding: 2rem 0.5rem; /* Giảm padding trên mobile */
+  }
+
   .timeline-container::before {
     left: 30px;
   }
@@ -135,6 +148,6 @@
   .timeline-content {
     margin-left: 0 !important;
     margin-right: 0 !important;
-    width: 100%;
+    width: calc(100% - 90px); /* Điều chỉnh width */
   }
 }
