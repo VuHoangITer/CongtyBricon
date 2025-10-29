@@ -1,0 +1,37 @@
+/* ==================== PAGINATION COMPONENT ====================
+ * File: 14-pagination.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== PAGINATION ==================== */
+.pagination {
+  gap: 0.25rem;
+}
+
+.pagination .page-link {
+  color: var(--text-dark);
+  border-color: var(--bg-gray);
+  transition: var(--transition-base);
+  border-radius: var(--radius-sm) !important;
+  margin: 0 0.125rem;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #000;
+  font-weight: 600;
+}
+
+.pagination .page-link:hover {
+  background-color: var(--bg-yellow-light);
+  border-color: var(--brand-primary);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.pagination .page-link:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+

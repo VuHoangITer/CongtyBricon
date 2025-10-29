@@ -1,0 +1,31 @@
+/* ==================== UNIFIED SCROLLBAR STYLES ====================
+ * File: 03-scrollbar.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== SCROLLBAR (Unified) ==================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #bfbfbf #f0f0f0;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #a6a6a6;
+}
+

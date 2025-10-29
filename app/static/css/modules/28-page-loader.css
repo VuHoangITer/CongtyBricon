@@ -1,0 +1,79 @@
+/* ==================== PAGE LOADER ====================
+ * File: 28-page-loader.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== PAGE LOADER ==================== */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  text-align: center;
+  color: #fff;
+}
+
+.loader-logo {
+  width: 200px;
+  max-width: 60vw;
+  margin-bottom: 20px;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.loader-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  height: 20px;
+  align-items: center;
+}
+
+.loader-dots span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: var(--brand-primary, #ffc107);
+  border-radius: 50%;
+  animation: slideRightToLeft 1.5s infinite ease-in-out;
+}
+
+.loader-dots span:nth-child(1) { animation-delay: 0s; }
+.loader-dots span:nth-child(2) { animation-delay: 0.15s; }
+.loader-dots span:nth-child(3) { animation-delay: 0.3s; }
+.loader-dots span:nth-child(4) { animation-delay: 0.45s; }
+.loader-dots span:nth-child(5) { animation-delay: 0.6s; }
+
+@keyframes slideRightToLeft {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+

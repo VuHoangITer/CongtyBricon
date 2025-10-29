@@ -1,0 +1,223 @@
+/* ==================== CTA SECTION ====================
+ * File: 35-nut-cta.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== CTA SECTION ==================== */
+.cta-section {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0 !important;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(45deg, transparent 48%, rgba(255, 107, 35, 0.03) 49%, rgba(255, 107, 35, 0.03) 51%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(255, 193, 7, 0.03) 49%, rgba(255, 193, 7, 0.03) 51%, transparent 52%);
+  background-size: 30px 30px;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.cta-bg-pattern {
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 35, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.cta-person-image {
+  position: absolute;
+  right: 5%;
+  bottom: 0;
+  width: 350px;
+  height: 100%;
+  background: url('../img/worker-cta.png') no-repeat bottom right;
+  background-size: contain;
+  z-index: 2;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.cta-section .container {
+  position: relative;
+  z-index: 3;
+}
+
+.cta-label {
+  display: inline-block;
+  color: var(--brand-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 1rem;
+}
+
+.cta-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 2px;
+  background: var(--brand-primary);
+}
+
+.cta-title {
+  color: var(--bg-white);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-description {
+  color: #d0d0d0;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* CTA Button */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-secondary-dark) 100%);
+  color: var(--bg-white);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(255, 107, 35, 0.4);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-cta:hover::before {
+  left: 100%;
+}
+
+.btn-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(255, 107, 35, 0.6);
+  color: var(--bg-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-cta span {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1px;
+}
+
+.cta-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-cta:hover .cta-icon {
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateX(5px) rotate(45deg);
+}
+
+.cta-icon i {
+  font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .cta-person-image {
+    display: none;
+  }
+
+  .cta-bg-pattern {
+    right: -30%;
+  }
+
+  .cta-title {
+    font-size: 1.75rem;
+  }
+
+  .cta-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-section {
+    padding: 3rem 0 !important;
+  }
+
+  .cta-label {
+    font-size: 0.7rem;
+    padding-left: 50px;
+  }
+
+  .cta-label::before {
+    width: 40px;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-description {
+    font-size: 0.9rem;
+  }
+
+  .btn-cta {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .cta-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+

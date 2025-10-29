@@ -1,0 +1,27 @@
+/* ==================== UTILITY CLASSES ====================
+ * File: 05-utilities.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== UTILITY CLASSES ==================== */
+.text-decoration-none { text-decoration: none !important; }
+.fw-semibold { font-weight: 600 !important; }
+.text-uppercase { text-transform: uppercase !important; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-2 { margin-bottom: var(--spacing-sm) !important; }
+.mb-3 { margin-bottom: var(--spacing-md) !important; }
+.mb-4 { margin-bottom: var(--spacing-lg) !important; }
+
+.mt-0 { margin-top: 0 !important; }
+.mt-3 { margin-top: var(--spacing-md) !important; }
+.mt-4 { margin-top: var(--spacing-lg) !important; }
+
+.me-2 { margin-right: var(--spacing-sm) !important; }
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+

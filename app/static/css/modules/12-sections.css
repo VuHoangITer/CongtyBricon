@@ -1,0 +1,235 @@
+/* ==================== SECTION STYLES ====================
+ * File: 12-sections.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== SECTIONS ==================== */
+.py-5 {
+  padding-top: 2.75rem;
+  padding-bottom: 2.75rem;
+}
+
+section h2 {
+  font-size: 1.85rem !important;
+}
+
+.title-underline {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-dark));
+  transition: var(--transition-base);
+}
+
+.blog-card:hover .card-title a {
+  color: var(--brand-primary);
+}
+
+.blog-card:hover .card-title a::after {
+  width: 100%;
+}
+
+/* Blog Excerpt */
+.blog-card .card-text {
+  font-size: 0.7rem;
+  line-height: 1.5;
+  height: 2.2em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 0.75rem;
+  flex: 1;
+  color: var(--text-muted);
+}
+
+/* Read More Button */
+.blog-card .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.7rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  border: none;
+  color: var(--text-dark);
+  transition: var(--transition-slow);
+  box-shadow: var(--shadow-brand);
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.blog-card .btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.blog-card .btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.blog-card .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+  background: linear-gradient(135deg, var(--brand-primary-dark) 0%, var(--brand-secondary) 100%);
+  color: var(--bg-white);
+}
+
+.blog-card .btn i {
+  transition: var(--transition-base);
+  position: relative;
+  z-index: 1;
+}
+
+.blog-card .btn:hover i {
+  transform: translateX(5px);
+}
+
+.blog-card .btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Blog Card - Tablet */
+@media (min-width: 576px) {
+  .blog-card {
+    border-radius: var(--radius-md);
+  }
+
+  .blog-card .position-relative {
+    height: 180px;
+  }
+
+  .blog-card .card-body {
+    padding: 1rem 0.875rem;
+  }
+
+  .blog-card .d-flex.align-items-center {
+    font-size: 0.7rem;
+  }
+
+  .blog-card .card-title {
+    font-size: 0.95rem;
+    height: 2.3em;
+  }
+
+  .blog-card .card-text {
+    font-size: 0.8rem;
+    height: 2.4em;
+    margin-bottom: 0.875rem;
+  }
+
+  .blog-card .btn {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.75rem;
+  }
+
+  .blog-card .badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.6rem;
+  }
+}
+
+/* Blog Card - Desktop */
+@media (min-width: 768px) {
+  .blog-card {
+    border-radius: 14px;
+  }
+
+  .blog-card .position-relative {
+    height: 200px;
+  }
+
+  .blog-card .card-body {
+    padding: 1.25rem 1rem;
+  }
+
+  .blog-card .d-flex.align-items-center {
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-card .card-title {
+    font-size: 1rem;
+    height: 2.4em;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-card .card-text {
+    font-size: 0.85rem;
+    height: 2.6em;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-10px);
+  }
+}
+
+/* Blog Card - Large Desktop */
+@media (min-width: 992px) {
+  .blog-card {
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-card .position-relative {
+    height: 240px;
+  }
+
+  .blog-card .card-body {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .blog-card .d-flex.align-items-center {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card .card-title {
+    font-size: 1.15rem;
+    height: 2.8em;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card .card-text {
+    font-size: 0.9rem;
+    height: 3.6em;
+    -webkit-line-clamp: 3;
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-card .btn {
+    padding: 0.65rem 1.35rem;
+    font-size: 0.85rem;
+    border-radius: 25px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .blog-card .position-relative {
+    height: 260px;
+  }
+
+  .blog-card .card-title {
+    font-size: 1.2rem;
+  }
+}
+

@@ -1,0 +1,70 @@
+/* ==================== TRANG SẢN PHẨM ====================
+ * File: 43-custom-trang-sp.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== PRODUCTS PAGE - MINIMAL STYLES - NAMESPACE: trang-san-pham-vn ==================== */
+
+/* Sidebar filter - Bo tròn và shadow nhẹ */
+.trang-san-pham-vn .filter-sidebar {
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.trang-san-pham-vn .filter-sidebar h5 {
+    color: #333;
+}
+
+/* Category links - Hover effect nhẹ */
+.trang-san-pham-vn .filter-sidebar a {
+    color: #666;
+    transition: all 0.2s ease;
+    display: block;
+    padding: 8px 0;
+}
+
+.trang-san-pham-vn .filter-sidebar a:hover {
+    color: #ffc107;
+    padding-left: 5px;
+}
+
+.trang-san-pham-vn .filter-sidebar a.text-warning {
+    color: #ffc107 !important;
+}
+
+/* Search input - Bo tròn */
+.trang-san-pham-vn .filter-sidebar .form-control {
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #ddd;
+}
+
+.trang-san-pham-vn .filter-sidebar .btn-warning {
+    border-radius: 0 20px 20px 0;
+}
+
+/* Sort select - Bo tròn */
+.trang-san-pham-vn .form-select {
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+}
+
+/* Toolbar */
+.trang-san-pham-vn .d-flex.justify-content-between {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Product cards responsive */
+@media (max-width: 768px) {
+    .trang-san-pham-vn .filter-sidebar {
+        margin-bottom: 20px;
+    }
+}
+
+/* Empty state icon */
+.trang-san-pham-vn .bi-inbox {
+    opacity: 0.3;
+}

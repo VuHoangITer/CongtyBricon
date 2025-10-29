@@ -1,0 +1,325 @@
+/* ==================== TRANG SẢN PHẨM CHI TIẾT ====================
+ * File: 44-custom-trang-sp-chitiet.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== NAMESPACE: TRANG SẢN PHẨM CHI TIẾT VN ==================== */
+.trang-san-pham-chi-tiet-vn {
+  /* ===== COLOR PALETTE ===== */
+  --primary-color: #FFC107;
+  --primary-light: #FFF8E1;
+  --text-dark: #2C3E50;
+  --text-muted: #6C757D;
+  --bg-light: #F8F9FA;
+  --border-color: #E9ECEF;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== PAGE HEADER & BREADCRUMB ===== */
+.trang-san-pham-chi-tiet-vn .page-header {
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.trang-san-pham-chi-tiet-vn .page-header h1 {
+  color: var(--text-dark);
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+}
+
+.trang-san-pham-chi-tiet-vn .breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.trang-san-pham-chi-tiet-vn .breadcrumb-item + .breadcrumb-item::before {
+  color: var(--text-muted);
+}
+
+.trang-san-pham-chi-tiet-vn .breadcrumb-item a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.trang-san-pham-chi-tiet-vn .breadcrumb-item.active {
+  color: var(--text-dark);
+}
+
+/* ===== PRODUCT IMAGE ===== */
+.trang-san-pham-chi-tiet-vn .product-detail-image {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.trang-san-pham-chi-tiet-vn .product-detail-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.trang-san-pham-chi-tiet-vn .product-detail-image .badge {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+/* ===== PRODUCT INFO SECTION ===== */
+.trang-san-pham-chi-tiet-vn h2.h3 {
+  color: var(--text-dark);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
+.trang-san-pham-chi-tiet-vn .badge {
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.trang-san-pham-chi-tiet-vn .badge.bg-info {
+  background-color: #E3F2FD !important;
+  color: #1976D2;
+}
+
+.trang-san-pham-chi-tiet-vn .badge.bg-warning {
+  background-color: var(--primary-light) !important;
+  color: #F57C00;
+}
+
+/* ===== PRICE SECTION ===== */
+.trang-san-pham-chi-tiet-vn .product-price-detail {
+  background: var(--primary-light);
+  border: 1px solid #FFE082;
+  border-radius: 10px;
+  padding: 1.5rem !important;
+}
+
+.trang-san-pham-chi-tiet-vn .product-price-detail h2 {
+  color: #F57C00;
+  font-weight: 700;
+  margin: 0;
+}
+
+.trang-san-pham-chi-tiet-vn .product-price-detail .text-muted {
+  font-size: 0.95rem;
+}
+
+.trang-san-pham-chi-tiet-vn .product-price-detail .badge.bg-danger {
+  background-color: #FFEBEE !important;
+  color: #C62828;
+  font-weight: 600;
+}
+
+/* ===== CTA BUTTONS ===== */
+.trang-san-pham-chi-tiet-vn .btn {
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border: none;
+  transition: none;
+}
+
+.trang-san-pham-chi-tiet-vn .btn-warning {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.trang-san-pham-chi-tiet-vn .btn-outline-primary {
+  border: 2px solid #2196F3;
+}
+
+.trang-san-pham-chi-tiet-vn .btn-outline-secondary {
+  border: 2px solid var(--border-color);
+}
+
+/* ===== SOCIAL SHARE ===== */
+.trang-san-pham-chi-tiet-vn .border-top {
+  border-color: var(--border-color) !important;
+  padding-top: 1.25rem !important;
+}
+
+.trang-san-pham-chi-tiet-vn .border-top h6 {
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ===== TABS NAVIGATION ===== */
+.trang-san-pham-chi-tiet-vn .nav-tabs {
+  border-bottom: 2px solid var(--border-color);
+}
+
+.trang-san-pham-chi-tiet-vn .nav-tabs .nav-link {
+  color: var(--text-muted);
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 0;
+  background: transparent;
+}
+
+.trang-san-pham-chi-tiet-vn .nav-tabs .nav-link.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  background: transparent;
+}
+
+/* ===== TAB CONTENT ===== */
+.trang-san-pham-chi-tiet-vn .tab-content .bg-light {
+  background-color: var(--bg-light) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.5rem !important;
+}
+
+.trang-san-pham-chi-tiet-vn .tab-content .bg-white {
+  background-color: #ffffff !important;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.5rem !important;
+}
+
+/* ===== SPECIFICATIONS SECTION ===== */
+.trang-san-pham-chi-tiet-vn h5.fw-bold {
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+.trang-san-pham-chi-tiet-vn .border-bottom.border-warning {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
+
+.trang-san-pham-chi-tiet-vn .table {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.trang-san-pham-chi-tiet-vn .table th,
+.trang-san-pham-chi-tiet-vn .table td {
+  padding: 0.875rem;
+  vertical-align: middle;
+  border-color: var(--border-color);
+}
+
+.trang-san-pham-chi-tiet-vn .table thead {
+  background-color: var(--bg-light);
+}
+
+.trang-san-pham-chi-tiet-vn .table tbody tr:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+.trang-san-pham-chi-tiet-vn .table .bg-light {
+  background-color: var(--bg-light) !important;
+}
+
+/* ===== CARDS ===== */
+.trang-san-pham-chi-tiet-vn .card {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.trang-san-pham-chi-tiet-vn .card-body {
+  padding: 1.25rem !important;
+}
+
+.trang-san-pham-chi-tiet-vn .card.border-warning {
+  border-color: #FFE082 !important;
+  background-color: var(--primary-light) !important;
+}
+
+/* ===== BADGES IN SPECS ===== */
+.trang-san-pham-chi-tiet-vn .badge.bg-light {
+  background-color: var(--bg-light) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--border-color) !important;
+  font-weight: 500;
+}
+
+.trang-san-pham-chi-tiet-vn .badge.bg-success {
+  background-color: #E8F5E9 !important;
+  color: #2E7D32 !important;
+  font-weight: 600;
+}
+
+/* ===== LISTS ===== */
+.trang-san-pham-chi-tiet-vn .list-unstyled li {
+  padding: 0.375rem 0;
+  line-height: 1.6;
+}
+
+/* ===== ICONS ===== */
+.trang-san-pham-chi-tiet-vn .bi {
+  vertical-align: middle;
+}
+
+.trang-san-pham-chi-tiet-vn .text-warning {
+  color: var(--primary-color) !important;
+}
+
+/* ===== RELATED PRODUCTS SECTION ===== */
+.trang-san-pham-chi-tiet-vn h3.fw-bold {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 991.98px) {
+  .trang-san-pham-chi-tiet-vn .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .trang-san-pham-chi-tiet-vn .product-detail-image {
+    margin-bottom: 1.5rem;
+  }
+
+  .trang-san-pham-chi-tiet-vn .nav-tabs .nav-link {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .trang-san-pham-chi-tiet-vn .page-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .trang-san-pham-chi-tiet-vn .product-price-detail {
+    padding: 1.25rem !important;
+  }
+
+  .trang-san-pham-chi-tiet-vn .btn-lg {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .trang-san-pham-chi-tiet-vn .nav-tabs .nav-link {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}

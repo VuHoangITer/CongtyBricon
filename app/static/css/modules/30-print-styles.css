@@ -1,0 +1,50 @@
+/* ==================== PRINT STYLES ====================
+ * File: 30-print-styles.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+  .navbar,
+  .floating-buttons,
+  .scroll-to-top,
+  .chatbot-button,
+  .chatbot-widget,
+  footer .social-links,
+  .btn,
+  .mobile-blog-carousel-btn,
+  .mobile-blog-carousel-dots {
+    display: none !important;
+  }
+
+  .product-card,
+  .blog-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+  }
+
+  .product-card:hover,
+  .blog-card:hover {
+    transform: none;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  h1 { font-size: 24pt; }
+  h2 { font-size: 18pt; }
+  h3 { font-size: 14pt; }
+
+  a {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+}
+

@@ -1,0 +1,19 @@
+/* ==================== ALERT MESSAGES ====================
+ * File: 20-alerts.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== ALERTS ==================== */
+.alert {
+  border: none;
+  border-left: 4px solid;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.alert-success { border-left-color: var(--color-success); }
+.alert-warning { border-left-color: var(--color-warning); }
+.alert-danger { border-left-color: var(--color-danger); }
+.alert-info { border-left-color: var(--color-info); }
+

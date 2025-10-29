@@ -1,0 +1,140 @@
+/* ==================== LỊCH SỬ PHÁT TRIỂN CỦA CÔNG TY ====================
+ * File: 41-lich-su-cong-ty.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== TIMELINE SECTION ==================== */
+.timeline-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--brand-primary) 0%, #ffb300 100%);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 50%;
+  padding-bottom: 4rem;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item:nth-child(even) {
+  justify-content: flex-start;
+  padding-right: 0;
+  padding-left: 50%;
+  transform: translateX(50px);
+}
+
+.timeline-item.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.timeline-item::before {
+  content: attr(data-year);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: var(--brand-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 0 0 8px rgba(255, 193, 7, 0.2);
+  z-index: 2;
+}
+
+.timeline-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 60px);
+  margin-right: 60px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-right: 0;
+  margin-left: 60px;
+}
+
+.timeline-content:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
+}
+
+.timeline-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, #ffb300 100%);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-content h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+}
+
+.timeline-content p {
+  color: #7f8c8d;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline-container::before {
+    left: 30px;
+  }
+
+  .timeline-item {
+    justify-content: flex-start !important;
+    padding-left: 80px !important;
+    padding-right: 0 !important;
+  }
+
+  .timeline-item::before {
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    font-size: 0.9rem;
+  }
+
+  .timeline-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+  }
+}

@@ -1,0 +1,55 @@
+/* ==================== FIX ĐƯỜNG VIỀN CỦA CARD BLOG & PRODUCT ====================
+ * File: 37-fix-duong-vien-card.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== LOẠI BỎ OUTLINE KHI FOCUS (Product & Blog) ==================== */
+.product-card,
+.product-card:focus,
+.product-card:focus-within,
+.blog-card,
+.blog-card:focus,
+.blog-card:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.product-name a,
+.product-name a:focus,
+.product-name a:active,
+.blog-card .card-title a,
+.blog-card .card-title a:focus,
+.blog-card .card-title a:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.product-card .btn,
+.product-card .btn:focus,
+.product-card .btn:active,
+.blog-card .btn,
+.blog-card .btn:focus,
+.blog-card .btn:active {
+  outline: none !important;
+  box-shadow: var(--shadow-brand) !important;
+}
+
+.blog-card img,
+.blog-card img:focus,
+.product-image img,
+.product-image img:focus {
+  outline: none !important;
+}
+
+/* Loại bỏ outline mặc định của trình duyệt cho tất cả */
+.product-card *,
+.blog-card * {
+  outline: none !important;
+}
+
+.product-card *:focus,
+.blog-card *:focus {
+  outline: none !important;
+}
+

@@ -1,0 +1,29 @@
+<!-- ==================== FEATURED BLOGS ==================== -->
+{% if featured_blogs %}
+<section class="py-5 bg-gray-dark" id="featured-blogs-section" data-page-section="blogs">
+  <div class="container">
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold mb-3">Tin tức nổi bật</h2>
+      <div class="title-underline mx-auto"></div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="row g-4" id="blog-grid-container">
+      {% for blog in featured_blogs %}
+          {% include 'components/card_blog.html' with context %}
+      {% endfor %}
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-5">
+      <a
+        href="{{ url_for('main.blog') }}"
+        class="btn btn-outline-warning btn-lg px-5"
+      >
+        Xem tất cả tin tức <i class="bi bi-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+{% endif %}

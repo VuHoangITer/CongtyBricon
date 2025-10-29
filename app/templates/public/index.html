@@ -1,0 +1,95 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+{{ get_setting('meta_title', 'BRICON VIỆT NAM | Keo của người Việt – Kết dính bền lâu, xây dựng niềm tin') }}
+{% endblock %}
+
+{% block meta_description %}
+{{ get_setting('index_meta_description', 'Keo dán gạch, keo chà ron và chống thấm BRICON – Keo của người Việt, kết dính bền lâu, xây dựng niềm tin.') }}
+{% endblock %}
+
+{% block content %}
+
+{% include 'plug-in-section/banner.html' %}
+
+{% include 'plug-in-section/certifications.html' %}
+
+{% include 'plug-in-section/aboutcompany.html' %}
+
+{% include 'plug-in-section/featured-products.html' %}
+
+{% include 'plug-in-section/processwork.html' %}
+
+{% include 'plug-in-section/whychose.html' %}
+
+{% include 'plug-in-section/company-timeline.html' %}
+
+{% include 'plug-in-section/featured_projects.html' %}
+
+{% include 'plug-in-section/featured-blogs.html' %}
+
+{% include 'plug-in-section/newsleter.html' %}
+
+{% include 'plug-in-section/customer-reviews.html' %}
+
+{% include 'plug-in-section/call-to-action.html' %}
+<!-- Schema WebSite -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ get_setting('website_name', 'BRICON VIỆT NAM') }}",
+    "url": "{{ get_setting('main_url', request.url_root) }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ url_for('main.products') }}?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+</script>
+<!-- Schema Product cho featured_products -->
+{% if featured_products %}
+<script type="application/ld+json">
+  [
+  {% for product in featured_products %}
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "{{ product.name|e }}",
+      "image": "{{ product.image|e }}",
+      "description": "{{ (product.description or 'Keo dán gạch, chà ron BRICON - Keo của người Việt')|e }}",
+      "sku": "{{ product.id }}",
+      "brand": {
+        "@type": "Brand",
+        "name": "{{ get_setting('website_name', 'BRICON VIỆT NAM')|e }}"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "VND",
+        "price": "{{ product.price }}",
+        "url": "{{ url_for('main.product_detail', slug=product.slug, _external=True) }}",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}
+  ]
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "{{ get_setting('website_name', 'BRICON VIỆT NAM') }} Banner Gallery",
+  "image": [
+    {% for banner in banners %}
+    {
+      "@type": "ImageObject",
+      "url": "{{ banner.image }}",
+      "name": "{{ banner.title }}",
+      "description": "{{ banner.subtitle }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %} {% endblock %}

@@ -1,0 +1,125 @@
+/* ==================== SECTION LABEL & TIMELINE FIXES ====================
+ * File: 32-section-label.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== END OF OPTIMIZED CSS ==================== */
+timeline {
+    gap: 1.25rem 0.75rem;
+  }
+
+  .process-step {
+    padding: 1.5rem 0.625rem 1rem;
+  }
+
+  .process-number {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .process-icon {
+    width: 65px;
+    height: 65px;
+  }
+
+  .process-icon i {
+    font-size: 1.6rem;
+  }
+
+  .process-title {
+    font-size: 0.825rem;
+  }
+
+  .process-description {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .work-process-section {
+    padding: 3.5rem 0;
+  }
+
+  .process-timeline {
+    padding: 0;
+    gap: 2.5rem 1.5rem;
+  }
+
+  .process-step {
+    padding: 2rem 1.25rem 1.75rem;
+  }
+
+  .process-number {
+    width: 45px;
+    height: 45px;
+    font-size: 1.15rem;
+  }
+
+  .process-icon {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 1.25rem;
+  }
+
+  .process-icon i {
+    font-size: 2.25rem;
+  }
+
+  .process-title {
+    font-size: 1rem;
+  }
+
+  .process-description {
+    font-size: 0.875rem;
+  }
+}
+
+/* Work Process - Desktop */
+@media (min-width: 992px) {
+  .work-process-section {
+    padding: 4rem 0;
+  }
+
+  .process-timeline {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .process-step {
+    padding: 2.5rem 1.5rem 2rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .process-(--brand-primary), #ffb300);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-block;
+  width: fit-content;
+}
+
+.section-label span {
+  color: #ffd700;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 50px;
+}
+
+.section-label span::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 2px;
+  background: #ffd700;
+}
+

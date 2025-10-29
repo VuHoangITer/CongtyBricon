@@ -1,0 +1,382 @@
+/* ==================== FEATURED PROJECTS CAROUSEL ====================
+ * File: 21-featured-projects.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== FEATURED PROJECTS CAROUSEL ==================== */
+/* ==================== FEATURED PROJECTS CAROUSEL ====================
+ * File: 21-featured-projects.css
+ * Auto-generated from style.css
+ * Date: 2025-10-26 21:38:37
+ * ========================================================================== */
+
+/* ==================== FEATURED PROJECTS CAROUSEL ==================== */
+#featured-projects .projects-carousel-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+#featured-projects .projects-carousel {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+#featured-projects .project-slide {
+  min-width: 100%;
+  max-width: 100%;
+  flex-shrink: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== LAYOUT NGANG cho MỌI thiết bị (ảnh trái, nội dung phải) ===== */
+#featured-projects .project-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-slow);
+  display: flex;
+  flex-direction: row; /* ✅ Layout ngang cho mọi màn hình */
+  height: 180px; /* ✅ Chiều cao vừa phải cho mobile */
+  pointer-events: auto;
+}
+
+#featured-projects .project-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+#featured-projects .project-image {
+  position: relative;
+  width: 40%; /* ✅ Ảnh chiếm 40% bên trái */
+  height: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-gray) 100%);
+}
+
+#featured-projects .project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+#featured-projects .project-card:hover .project-image img {
+  transform: scale(1.1);
+}
+
+/* ===== BADGE - Thu nhỏ cho mobile ===== */
+#featured-projects .project-image .badge {
+  font-size: 0.55rem; /* ✅ Rất nhỏ cho mobile */
+  padding: 0.25rem 0.4rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%; /* ✅ Không cho badge quá rộng */
+}
+
+#featured-projects .project-image .badge i {
+  font-size: 0.6rem;
+}
+
+#featured-projects .project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
+  opacity: 0;
+  transition: var(--transition-slow);
+}
+
+#featured-projects .project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+#featured-projects .project-info {
+  width: 60%; /* ✅ Nội dung chiếm 60% bên phải */
+  padding: 0.5rem 0.6rem; /* ✅ Padding nhỏ cho mobile */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+}
+
+#featured-projects .project-title {
+  font-size: 0.75rem; /* ✅ Chữ nhỏ cho mobile */
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* ✅ Tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#featured-projects .project-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.6rem; /* ✅ Meta info rất nhỏ */
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+#featured-projects .meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+#featured-projects .meta-item i {
+  font-size: 0.65rem;
+}
+
+#featured-projects .project-description {
+  color: var(--text-muted);
+  line-height: 1.3;
+  font-size: 0.65rem; /* ✅ Mô tả nhỏ */
+  margin-bottom: 0.4rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* ✅ Tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* ===== CHỈ SỬA NÚT "XEM CHI TIẾT" ===== */
+#featured-projects .project-info .btn {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  align-self: flex-start;
+  background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+  border: none;
+  border-radius: 20px; /* ✅ Bo tròn đẹp */
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.25);
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+#featured-projects .project-info .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+  background: linear-gradient(135deg, #FFD54F 0%, #FFC107 100%);
+}
+
+#featured-projects .project-info .btn i {
+  font-size: 0.7rem;
+  margin-right: 0.25rem;
+  transition: transform 0.3s ease;
+}
+
+#featured-projects .project-info .btn:hover i {
+  transform: translateX(3px); /* ✅ Icon dịch nhẹ khi hover */
+}
+
+#featured-projects .carousel-nav {
+  display: none !important;
+}
+
+#featured-projects .carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+#featured-projects .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-gray);
+  cursor: pointer;
+  transition: var(--transition-base);
+  border: 2px solid transparent;
+}
+
+#featured-projects .dot:hover {
+  background: #adb5bd;
+  transform: scale(1.2);
+}
+
+#featured-projects .dot.active {
+  background: var(--brand-primary);
+  width: 30px;
+  border-radius: 6px;
+  border-color: var(--brand-primary);
+}
+
+/* Featured Projects - Tablet (≥576px) */
+@media (min-width: 576px) {
+  #featured-projects .project-card {
+    height: 200px; /* ✅ Tăng chiều cao */
+  }
+
+  #featured-projects .project-info {
+    padding: 0.75rem;
+  }
+
+  #featured-projects .project-image .badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  #featured-projects .project-title {
+    font-size: 0.85rem;
+    margin-bottom: 0.35rem;
+  }
+
+  #featured-projects .project-meta {
+    font-size: 0.7rem;
+    gap: 0.75rem;
+  }
+
+  #featured-projects .project-description {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #featured-projects .project-info .btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.7rem;
+  }
+
+  #featured-projects .carousel-dots {
+    gap: 0.75rem;
+  }
+}
+
+/* Featured Projects - Tablet lớn (≥768px) */
+@media (min-width: 768px) {
+  #featured-projects .projects-carousel-wrapper {
+    padding: 0 15px;
+  }
+
+  #featured-projects .project-card {
+    height: 220px;
+  }
+
+  #featured-projects .project-info {
+    padding: 1rem;
+  }
+
+  #featured-projects .project-image .badge {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.6rem;
+  }
+
+  #featured-projects .project-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #featured-projects .project-meta {
+    gap: 1rem;
+    font-size: 0.75rem;
+  }
+
+  #featured-projects .project-description {
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  #featured-projects .project-info .btn {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Featured Projects - Desktop (≥992px) */
+@media (min-width: 992px) {
+  #featured-projects .project-card {
+    height: 280px; /* ✅ Tăng chiều cao cho desktop */
+  }
+
+  #featured-projects .project-info {
+    padding: 1.5rem;
+  }
+
+  #featured-projects .project-image .badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  #featured-projects .project-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    -webkit-line-clamp: 2;
+  }
+
+  #featured-projects .project-meta {
+    font-size: 0.85rem;
+    gap: 1.25rem;
+  }
+
+  #featured-projects .project-description {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 3;
+    margin-bottom: 1rem;
+  }
+
+  #featured-projects .project-info .btn {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.8rem;
+  }
+
+  #featured-projects .carousel-dots {
+    margin-top: 2rem;
+  }
+
+  #featured-projects .dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  #featured-projects .dot.active {
+    width: 40px;
+  }
+}
+
+/* Featured Projects - Large Desktop (≥1200px) */
+@media (min-width: 1200px) {
+  #featured-projects .project-card {
+    height: 320px;
+  }
+
+  #featured-projects .project-info {
+    padding: 2rem;
+  }
+
+  #featured-projects .project-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  #featured-projects .project-description {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  #featured-projects .project-meta {
+    font-size: 0.9rem;
+  }
+
+  #featured-projects .project-info .btn {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+

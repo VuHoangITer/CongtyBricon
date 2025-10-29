@@ -1,0 +1,24 @@
+/* ==================== SKIP LINK FOR ACCESSIBILITY ====================
+ * File: 04-skip-link.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== SKIP LINK (Accessibility) ==================== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--brand-primary);
+  color: var(--text-dark);
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: var(--z-tooltip);
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+

@@ -1,0 +1,83 @@
+/* ==================== SCROLL TO TOP BUTTON ====================
+ * File: 17-scroll-to-top.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== SCROLL TO TOP BUTTON ==================== */
+.scroll-to-top {
+  position: fixed;
+  bottom: 100px;
+  right: 0.75rem;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  background: var(--bg-white);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: calc(var(--z-fixed) - 1);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-slow);
+  border: none;
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.scroll-to-top svg circle {
+  fill: none;
+  stroke: var(--bg-gray);
+  stroke-width: 2.5;
+}
+
+.scroll-to-top svg circle.progress {
+  stroke: var(--brand-primary);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.scroll-to-top .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  transition: var(--transition-base);
+}
+
+.scroll-to-top:hover .icon {
+  color: var(--brand-primary);
+}
+
+@media (min-width: 768px) {
+  .scroll-to-top {
+    bottom: 100px;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+  }
+
+  .scroll-to-top .icon {
+    font-size: 1.2rem;
+  }
+}
+

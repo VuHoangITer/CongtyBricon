@@ -1,0 +1,87 @@
+<!-- ==================== NEWSLETTER ==================== -->
+<section class="newsletter-section py-5" id="newsletter-section">
+  <div class="container">
+    <div class="newsletter-wrapper">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <div class="newsletter-content">
+            <span class="newsletter-badge">
+              <i class="bi bi-envelope-heart"></i> MIỄN PHÍ
+            </span>
+            <h2 class="newsletter-title">
+              Nhận Tin Tức & Ưu Đãi <span class="highlight">Độc Quyền</span>
+            </h2>
+            <p class="newsletter-desc">
+              Đăng ký để nhận thông tin về sản phẩm mới, hướng dẫn thi công, 
+              và các chương trình khuyến mãi đặc biệt dành riêng cho bạn!
+            </p>
+            <ul class="newsletter-benefits">
+              <li><i class="bi bi-check-circle-fill"></i> Tips thi công chuyên nghiệp</li>
+              <li><i class="bi bi-check-circle-fill"></i> Ưu đãi giảm giá đến 20%</li>
+              <li><i class="bi bi-check-circle-fill"></i> Thông tin sản phẩm mới nhất</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="newsletter-form-wrapper">
+            <form id="newsletterForm" class="newsletter-form" novalidate>
+              <div class="form-group-inline">
+                <input 
+                  type="email" 
+                  id="newsletter-email" 
+                  name="email"
+                  class="newsletter-input" 
+                  placeholder="Nhập email của bạn..."
+                  required
+                  autocomplete="email"
+                >
+                <button type="submit" class="newsletter-btn" id="newsletter-submit-btn">
+                  <span class="btn-text">Đăng Ký</span>
+                  <span class="btn-icon"><i class="bi bi-send-fill"></i></span>
+                  <span class="btn-spinner d-none">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                  </span>
+                </button>
+              </div>
+              
+              <div class="form-check mt-3">
+                <input 
+                  type="checkbox" 
+                  class="form-check-input" 
+                  id="newsletter-consent"
+                  name="consent"
+                  required
+                >
+                <label class="form-check-label" for="newsletter-consent">
+                  Tôi đồng ý nhận email marketing từ BRICON
+                </label>
+              </div>
+
+              <div class="newsletter-message" id="newsletterMessage"></div>
+            </form>
+
+            <!-- Trust indicators -->
+            <div class="newsletter-trust">
+              <div class="trust-item">
+                <i class="bi bi-shield-check"></i>
+                <span>Không spam</span>
+              </div>
+              <div class="trust-item">
+                <i class="bi bi-envelope-check"></i>
+                <span>Hủy bất cứ lúc nào</span>
+              </div>
+              <div class="trust-item">
+                <i class="bi bi-lock"></i>
+                <span>Bảo mật thông tin</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated Background -->
+  <div class="newsletter-bg-pattern"></div>
+</section>

@@ -1,0 +1,67 @@
+/* ==================== PAGE HEADER & BREADCRUMB ====================
+ * File: 15-page-header.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== PAGE HEADER & BREADCRUMB ==================== */
+.page-header {
+  background: linear-gradient(to bottom, var(--bg-white), #fffbf0);
+  padding: 2rem 0;
+}
+
+.page-header h1 {
+  color: var(--text-dark);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-size: 1.75rem;
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.breadcrumb-item {
+  color: var(--text-muted);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  font-size: 1.2em;
+  color: var(--text-muted);
+  padding: 0 0.5rem;
+}
+
+.breadcrumb-item a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--brand-primary);
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: var(--text-body);
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .page-header {
+    padding: 3rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.875rem;
+  }
+}
+

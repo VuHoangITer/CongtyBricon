@@ -1,0 +1,164 @@
+/* ==================== WORK PROCESS SECTION ====================
+ * File: 22-work-process.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== WORK PROCESS SECTION ==================== */
+.work-process-section {
+  background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 0;
+}
+
+.process-timeline {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 1rem;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 0.75rem;
+}
+
+.process-step {
+  position: relative;
+  text-align: center;
+  background: white;
+  padding: 1.75rem 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-slow);
+  border: 2px solid transparent;
+}
+
+.process-step:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(255, 193, 7, 0.25);
+  border-color: var(--brand-primary);
+}
+
+.process-number {
+  position: absolute;
+  top: -15px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-secondary-dark) 100%);
+  color: white;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+  z-index: 2;
+  border: 3px solid white;
+}
+
+.process-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 0.875rem;
+  background: linear-gradient(135deg, var(--bg-yellow-light) 0%, #ffe69c 100%);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--brand-primary);
+  transition: var(--transition-slow);
+}
+
+.process-step:hover .process-icon {
+  transform: rotate(360deg) scale(1.1);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+}
+
+.process-icon i {
+  font-size: 1.75rem;
+  color: var(--brand-secondary);
+  transition: var(--transition-base);
+}
+
+.process-step:hover .process-icon i {
+  color: white;
+}
+
+.process-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.process-description {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Work Process - Tablet */
+@media (min-width: 576px) {
+  .process-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    top: -20px;
+    right: 20px;
+  }
+
+  .process-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .process-icon i {
+    font-size: 2.5rem;
+  }
+
+  .process-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .process-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Connecting Arrows - Desktop Only */
+  .process-step::after {
+    content: '→';
+    position: absolute;
+    top: 80px;
+    right: -2.5rem;
+    font-size: 2rem;
+    color: var(--brand-primary);
+    font-weight: bold;
+    z-index: 1;
+    opacity: 0.6;
+    animation: arrow-pulse 2s ease-in-out infinite;
+  }
+
+  .process-step:last-child::after {
+    display: none;
+  }
+}
+
+@keyframes arrow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(5px);
+  }
+}
+

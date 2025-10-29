@@ -1,0 +1,104 @@
+/* ==================== PROJECT FILTER BUTTONS ====================
+ * File: 25-project-filters.css
+ * Auto-generated from style.css
+ * Date: 2025-10-27 22:15:18
+ * ========================================================================== */
+
+/* ==================== PROJECT FILTER BUTTONS ==================== */
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.project-filters .btn {
+  padding: 0.6rem 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  white-space: nowrap;
+}
+
+.project-filters .btn i {
+  font-size: 0.9rem;
+  margin-right: 0.35rem;
+}
+
+.project-filters .btn-warning {
+  background-color: #ffe45c;
+  border-color: #ffe45c;
+  color: var(--text-dark);
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.project-filters .btn-warning i {
+  color: var(--text-dark);
+}
+
+.project-filters .btn-warning:hover {
+  background-color: #ffd633;
+  border-color: #ffd633;
+}
+
+.project-filters .btn-outline-secondary:hover {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  border-color: #dcdcdc;
+}
+@media (max-width: 767px) {
+  .project-filters .d-flex {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0.75rem; /* có khoảng cách hai bên */
+    box-sizing: border-box;
+  }
+
+
+  /* Căn full width trong container Bootstrap */
+  .filter-section .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Các nút filter */
+  .project-filters .btn {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.5rem;
+    line-height: 1.3;
+    text-align: center;
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+  }
+
+  /* Icon trong nút */
+  .project-filters .btn i {
+    font-size: 0.9rem;
+    margin-right: 0.35rem;
+  }
+}
+
+/* Màn rất nhỏ (ví dụ iPhone 5/SE) */
+@media (max-width: 359px) {
+  .project-filters .d-flex {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
+
+  .project-filters .btn {
+    font-size: 0.8rem;
+  }
+}
+
