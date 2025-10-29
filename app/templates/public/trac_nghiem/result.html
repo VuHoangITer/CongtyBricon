@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/clone.html' %}
 
 {% block title %}Kết quả - {{ quiz.title }}{% endblock %}
 
@@ -231,25 +231,25 @@
     .result-title {
         font-size: 1.5rem;
     }
-    
+
     .score-circle {
         width: 150px;
         height: 150px;
     }
-    
+
     .score-value {
         font-size: 3rem;
     }
-    
+
     .stats-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
-    
+
     .action-buttons {
         flex-direction: column;
     }
-    
+
     .action-btn {
         width: 100%;
     }
@@ -422,11 +422,11 @@
     footer {
         display: none !important;
     }
-    
+
     .result-container {
         max-width: 100%;
     }
-    
+
     .question-review {
         page-break-inside: avoid;
     }
