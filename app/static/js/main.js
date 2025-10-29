@@ -369,7 +369,7 @@ window.addEventListener('resize', function() {
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('page-loader');
   if (loader) {
-    setTimeout(() => loader.classList.add('hidden'), 1000);
+    setTimeout(() => loader.classList.add('hidden'), 500);
   }
 });
 

@@ -2,7 +2,7 @@
  * ==================== LOADING TOÀN TRANG ====================
  * File: 10-page-loader.js
  * Tạo tự động từ: main.js
- * Ngày tạo: 29/10/2025 18:39:29
+ * Ngày tạo: 29/10/2025 18:44:48
  * ==========================================================================
  * 
 
@@ -24,7 +24,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('page-loader');
   if (loader) {
-    setTimeout(() => loader.classList.add('hidden'), 1000);
+    setTimeout(() => loader.classList.add('hidden'), 500);
   }
 });
 
