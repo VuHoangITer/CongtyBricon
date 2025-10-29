@@ -20,79 +20,16 @@
     margin-bottom: 2rem;
 }
 
-.result-header {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: #fff;
-    padding: 2rem;
-    text-align: center;
-}
-
-.result-header.failed {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-}
-
-.result-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.result-subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* ==================== SCORE DISPLAY ==================== */
-.score-display {
-    padding: 2rem;
-    text-align: center;
-    background: linear-gradient(to bottom, #f8f9fa, #fff);
-}
-
-.score-circle {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 1.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background: #fff;
-    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0.1);
-}
-
-.score-circle.failed {
-    box-shadow: 0 0 0 10px rgba(220, 53, 69, 0.1);
-}
-
-.score-value {
-    font-size: 4rem;
-    font-weight: 700;
-    color: #28a745;
-}
-
-.score-value.failed {
-    color: #dc3545;
-}
-
-.score-label {
-    font-size: 1.2rem;
-    color: #666;
-    margin-top: 0.5rem;
-}
-
 /* ==================== STATS GRID ==================== */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Luôn 4 cột đều nhau */
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     padding: 2rem;
     background: #f8f9fa;
     align-items: stretch;
     text-align: center;
 }
-
 
 .stat-item {
     background: #fff;
@@ -117,28 +54,6 @@
 .stat-label {
     font-size: 0.9rem;
     color: #666;
-}
-
-/* ==================== STATUS BADGE ==================== */
-.status-badge {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 1rem 0;
-}
-
-.status-badge.passed {
-    background: #d4edda;
-    color: #155724;
-    border: 2px solid #28a745;
-}
-
-.status-badge.failed {
-    background: #f8d7da;
-    color: #721c24;
-    border: 2px solid #dc3545;
 }
 
 /* ==================== REVIEW SECTION ==================== */
@@ -209,49 +124,27 @@
     font-weight: 700;
 }
 
-/* ==================== ACTION BUTTONS ==================== */
-.action-buttons {
-    display: flex;
-    gap: 1rem;
-    padding: 2rem;
-    flex-wrap: wrap;
-}
-
-.action-btn {
-    flex: 1;
-    min-width: 200px;
-    padding: 1rem 2rem;
-    font-weight: 600;
-    border-radius: 10px;
-    font-size: 1.05rem;
-}
-
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 768px) {
-    .result-title {
-        font-size: 1.5rem;
-    }
-
-    .score-circle {
-        width: 150px;
-        height: 150px;
-    }
-
-    .score-value {
-        font-size: 3rem;
-    }
-
     .stats-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
+}
 
-    .action-buttons {
-        flex-direction: column;
+/* ==================== PRINT STYLES ==================== */
+@media print {
+    .navbar,
+    footer {
+        display: none !important;
     }
 
-    .action-btn {
-        width: 100%;
+    .result-container {
+        max-width: 100%;
+    }
+
+    .question-review {
+        page-break-inside: avoid;
     }
 }
 </style>
@@ -261,72 +154,26 @@
 <div class="result-container">
     <!-- Result Card -->
     <div class="result-card">
-        <!-- Header -->
-        <div class="result-header {% if not attempt.passed %}failed{% endif %}">
-            <div class="result-title">
-                {% if attempt.passed %}
-                    BẠN ĐÃ ĐẠT!
-                {% else %}
-                    BẠN CHƯA ĐẠT!
-                {% endif %}
-            </div>
-            <div class="result-subtitle">{{ quiz.title }}</div>
-        </div>
-
-        <!-- Score Display -->
-        <div class="score-display">
-          <div class="score-circle {% if not attempt.passed %}failed{% endif %}">
-              <div>
-                  <div class="score-value {% if not attempt.passed %}failed{% endif %}">
-                      {{ "%.0f"|format(attempt.score) }}%
-                  </div>
-                  <div class="text-center">
-                      <small class="text-muted">phần trăm đúng</small>
-                  </div>
-              </div>
-          </div>
-
-
-            <div class="status-badge {% if attempt.passed %}passed{% else %}failed{% endif %}">
-                {% if attempt.passed %}
-                    ✓ ĐẠT YÊU CẦU ({{ quiz.pass_score }}%)
-                {% else %}
-                    ✗ CHƯA ĐẠT (Cần {{ quiz.pass_score }}%)
-                {% endif %}
-            </div>
-
-            <p class="text-muted mt-3">
-                Người làm bài: <strong>{{ attempt.user_name }}</strong>
-                {% if attempt.user_email %}
-                    <br>Email: {{ attempt.user_email }}
-                {% endif %}
-            </p>
-        </div>
-
         <!-- Statistics Grid -->
         <div class="stats-grid">
             <div class="stat-item">
-                <div class="stat-icon">📝</div>
-                <div class="stat-value">{{ attempt.total_questions }}</div>
                 <div class="stat-label">Tổng câu hỏi</div>
+                <div class="stat-value">{{ attempt.total_questions }}</div>
             </div>
 
             <div class="stat-item">
-                <div class="stat-icon">✅</div>
-                <div class="stat-value text-success">{{ attempt.correct_answers }}</div>
                 <div class="stat-label">Câu trả lời đúng</div>
+                <div class="stat-value text-success">{{ attempt.correct_answers }}</div>
             </div>
 
             <div class="stat-item">
-                <div class="stat-icon">❌</div>
-                <div class="stat-value text-danger">{{ attempt.wrong_answers }}</div>
                 <div class="stat-label">Câu trả lời sai</div>
+                <div class="stat-value text-danger">{{ attempt.wrong_answers }}</div>
             </div>
 
             <div class="stat-item">
-                <div class="stat-icon">⏱️</div>
-                <div class="stat-value">{{ attempt.get_time_spent_formatted() }}</div>
                 <div class="stat-label">Thời gian làm bài</div>
+                <div class="stat-value">{{ attempt.get_time_spent_formatted() }}</div>
             </div>
         </div>
 
@@ -340,10 +187,10 @@
           <!-- Tabs -->
           <ul class="nav nav-tabs mb-3" id="reviewTabs">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#tab-correct">✅ Câu đúng</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#tab-correct">Câu đúng</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#tab-wrong">❌ Câu sai</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#tab-wrong"> Câu sai</a>
             </li>
           </ul>
 
@@ -355,11 +202,10 @@
               {% for item in correct_questions %}
                 <div class="question-review">
                   <div class="question-review-header">
-                    <span class="text-success">✓ Đúng</span> - Câu {{ loop.index }}
+                    <span class="text-success">Đúng</span> - Câu {{ loop.index }}
                   </div>
                   <div class="question-review-text">{{ item.question.question_text }}</div>
                   <div class="answer-review correct">
-                    <span class="answer-icon">✓</span>
                     <strong>Câu trả lời của bạn:</strong> {{ item.selected_answer.answer_text }}
                   </div>
                   {% if item.question.explanation %}
@@ -382,15 +228,13 @@
               {% for item in wrong_questions %}
                 <div class="question-review wrong">
                   <div class="question-review-header">
-                    <span class="text-danger">✗ Sai</span> - Câu {{ loop.index }}
+                    <span class="text-danger">Sai</span> - Câu {{ loop.index }}
                   </div>
                   <div class="question-review-text">{{ item.question.question_text }}</div>
                   <div class="answer-review wrong">
-                    <span class="answer-icon">✗</span>
                     <strong>Câu trả lời của bạn:</strong> {{ item.selected_answer.answer_text }}
                   </div>
                   <div class="answer-review correct">
-                    <span class="answer-icon">✓</span>
                     <strong>Đáp án đúng:</strong> {{ item.correct_answer.answer_text }}
                   </div>
                   {% if item.question.explanation %}
@@ -407,31 +251,13 @@
           </div>
         </div>
 
-        <!-- PHÂN TRANG (nếu nhiều hơn 5 câu) -->
+        <!-- PHÂN TRANG -->
         <nav id="paginationContainer" class="mt-4 text-center"></nav>
       </div>
         {% endif %}
     </div>
 </div>
 
-<style>
-/* Print styles */
-@media print {
-    .action-buttons,
-    .navbar,
-    footer {
-        display: none !important;
-    }
-
-    .result-container {
-        max-width: 100%;
-    }
-
-    .question-review {
-        page-break-inside: avoid;
-    }
-}
-</style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const perPage = 5;
@@ -478,10 +304,11 @@ document.addEventListener("DOMContentLoaded", function() {
     showPage(currentPage);
   }
 });
-  // Ngăn chặn quay lại trang trước
+
+// Ngăn chặn quay lại trang trước
+history.pushState(null, null, window.location.href);
+window.onpopstate = function () {
   history.pushState(null, null, window.location.href);
-  window.onpopstate = function () {
-    history.pushState(null, null, window.location.href);
-  };
+};
 </script>
 {% endblock %}
