@@ -1783,7 +1783,7 @@ footer .social-links {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin-top: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 footer .social-links a {
@@ -1843,8 +1843,6 @@ footer .social-links a[aria-label*="Zalo"]:hover {
   padding: 0.85rem;
   box-shadow: var(--shadow-sm);
   margin-bottom: 1rem;
-  margin-left: auto;
-  margin-right: auto;
   max-width: 320px;
   overflow: hidden; /* để lớp tối không tràn */
 }
@@ -1881,7 +1879,7 @@ footer .social-links a[aria-label*="Zalo"]:hover {
 
 .fanpage-image-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 0.5rem;
 }
 
@@ -1896,7 +1894,7 @@ footer .social-links a[aria-label*="Zalo"]:hover {
 }
 
 .fanpage-info {
-  text-align: center;
+  text-align: left;
 }
 
 .fanpage-name {
@@ -1911,7 +1909,7 @@ footer .social-links a[aria-label*="Zalo"]:hover {
   font-size: 0.8rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.25rem;
 }
 
