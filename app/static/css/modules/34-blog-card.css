@@ -1,7 +1,7 @@
 /* ==================== BLOG CARD COMPONENT ====================
  * File: 34-blog-card.css
  * Auto-generated from style.css
- * Date: 2025-10-29 21:15:29
+ * Date: 2025-10-30 09:05:00
  * ========================================================================== */
 
 /* ==================== BLOG CARD (Mobile-First) ==================== */
@@ -28,7 +28,7 @@
   overflow: hidden;
   background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-gray) 100%);
   position: relative;
-  height: 140px; /* Giảm từ 160px → 140px */
+  height: 140px;
 }
 
 .blog-card img {
@@ -65,7 +65,7 @@
 
 /* Card Body - GIẢM PADDING */
 .blog-card .card-body {
-  padding: 0.75rem 0.65rem; /* Giảm từ 0.875rem 0.75rem */
+  padding: 0.75rem 0.65rem;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -75,7 +75,7 @@
 /* Meta Info - GIẢM MARGIN */
 .blog-card .d-flex.align-items-center {
   font-size: 0.65rem;
-  margin-bottom: 0.5rem; /* Giảm từ 0.65rem → 0.5rem */
+  margin-bottom: 0.5rem;
   gap: 0.35rem;
 }
 
@@ -91,17 +91,18 @@
   font-size: 0.8rem;
 }
 
-/* Blog Title - GIỮ NGUYÊN 2 DÒNG */
+/* Blog Title - ✅ FIX CHIỀU CAO */
 .blog-card .card-title {
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.4;
-  height: 2.2em; /* Giữ nguyên 2 dòng */
+  min-height: 2.8em; /* ✅ ĐỔI: 1.4 × 2 = 2.8em */
+  max-height: 2.8em; /* ✅ THÊM: Giới hạn tối đa */
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Giữ nguyên 2 dòng */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  margin-bottom: 0.5rem; /* Giảm từ 0.6rem → 0.5rem */
+  margin-bottom: 0.5rem;
 }
 
 .blog-card .card-title a {
@@ -115,12 +116,13 @@
 .blog-card .card-text {
   font-size: 0.7rem;
   line-height: 1.5;
-  height: 1.5em; /* Giảm từ 2.2em → 1.5em (1 dòng) */
+  min-height: 1.5em; /* ✅ ĐỔI: min-height thay vì height */
+  max-height: 1.5em; /* ✅ THÊM */
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* Giảm từ 2 → 1 dòng */
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  margin-bottom: 0.3rem; /* Giảm từ 0.4rem → 0.3rem */
+  margin-bottom: 0.3rem;
   flex: 1;
   color: var(--text-muted);
 }
@@ -130,10 +132,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.45rem 0.9rem; /* Giảm từ 0.5rem 1rem */
+  padding: 0.45rem 0.9rem;
   font-weight: 600;
-  font-size: 0.65rem; /* Giảm từ 0.7rem → 0.65rem */
-  border-radius: 18px; /* Giảm từ 20px → 18px */
+  font-size: 0.65rem;
+  border-radius: 18px;
   background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   border: none;
   color: var(--text-dark);
@@ -191,28 +193,32 @@
   }
 
   .blog-card .position-relative {
-    height: 160px; /* Giảm từ 180px → 160px */
+    height: 160px;
   }
 
   .blog-card .card-body {
-    padding: 0.875rem 0.75rem; /* Giảm từ 1rem 0.875rem */
+    padding: 0.875rem 0.75rem;
   }
 
   .blog-card .d-flex.align-items-center {
     font-size: 0.7rem;
-    margin-bottom: 0.55rem; /* Giảm từ 0.65rem */
+    margin-bottom: 0.55rem;
   }
 
   .blog-card .card-title {
     font-size: 0.95rem;
-    height: 2.3em;
-    margin-bottom: 0.55rem; /* Giảm từ 0.6rem */
+    line-height: 1.4;
+    min-height: 2.8em; /* ✅ 1.4 × 2 = 2.8em */
+    max-height: 2.8em;
+    margin-bottom: 0.55rem;
   }
 
   .blog-card .card-text {
     font-size: 0.75rem;
-    height: 1.5em; /* CHỈ 1 DÒNG */
-    -webkit-line-clamp: 1; /* CHỈ 1 DÒNG */
+    line-height: 1.5;
+    min-height: 1.5em;
+    max-height: 1.5em;
+    -webkit-line-clamp: 1;
     margin-bottom: 0.4rem;
   }
 
@@ -234,28 +240,32 @@
   }
 
   .blog-card .position-relative {
-    height: 180px; /* Giảm từ 200px → 180px */
+    height: 180px;
   }
 
   .blog-card .card-body {
-    padding: 1rem 0.875rem; /* Giảm từ 1.25rem 1rem */
+    padding: 1rem 0.875rem;
   }
 
   .blog-card .d-flex.align-items-center {
     font-size: 0.75rem;
-    margin-bottom: 0.6rem; /* Giảm từ 0.75rem → 0.6rem */
+    margin-bottom: 0.6rem;
   }
 
   .blog-card .card-title {
     font-size: 1rem;
-    height: 2.4em;
-    margin-bottom: 0.65rem; /* Giảm từ 0.75rem → 0.65rem */
+    line-height: 1.4;
+    min-height: 2.8em; /* ✅ 1.4 × 2 = 2.8em */
+    max-height: 2.8em;
+    margin-bottom: 0.65rem;
   }
 
   .blog-card .card-text {
     font-size: 0.8rem;
-    height: 1.6em; /* CHỈ 1 DÒNG */
-    -webkit-line-clamp: 1; /* CHỈ 1 DÒNG */
+    line-height: 1.5;
+    min-height: 1.5em;
+    max-height: 1.5em;
+    -webkit-line-clamp: 1;
     margin-bottom: 0.5rem;
   }
 
@@ -277,28 +287,32 @@
   }
 
   .blog-card .position-relative {
-    height: 200px; /* Giảm từ 240px → 200px */
+    height: 200px;
   }
 
   .blog-card .card-body {
-    padding: 1.125rem 1rem; /* Giảm từ 1.5rem 1.25rem */
+    padding: 1.125rem 1rem;
   }
 
   .blog-card .d-flex.align-items-center {
     font-size: 0.8rem;
-    margin-bottom: 0.7rem; /* Giảm từ 1rem → 0.7rem */
+    margin-bottom: 0.7rem;
   }
 
   .blog-card .card-title {
     font-size: 1.15rem;
-    height: 2.8em;
-    margin-bottom: 0.75rem; /* Giảm từ 1rem → 0.75rem */
+    line-height: 1.4;
+    min-height: 2.8em; /* ✅ 1.4 × 2 = 2.8em */
+    max-height: 2.8em;
+    margin-bottom: 0.75rem;
   }
 
   .blog-card .card-text {
     font-size: 0.85rem;
-    height: 1.7em; /* CHỈ 1 DÒNG (hoặc để 2 nếu muốn) */
-    -webkit-line-clamp: 1; /* CHỈ 1 DÒNG (hoặc 2 nếu muốn) */
+    line-height: 1.5;
+    min-height: 1.5em;
+    max-height: 1.5em;
+    -webkit-line-clamp: 1;
     margin-bottom: 0.5rem;
   }
 
@@ -311,10 +325,13 @@
 
 @media (min-width: 1200px) {
   .blog-card .position-relative {
-    height: 220px; /* Giảm từ 260px → 220px */
+    height: 220px;
   }
 
   .blog-card .card-title {
     font-size: 1.2rem;
+    line-height: 1.4;
+    min-height: 2.8em; /* ✅ 1.4 × 2 = 2.8em */
+    max-height: 2.8em;
   }
 }
