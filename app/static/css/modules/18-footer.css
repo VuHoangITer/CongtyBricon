@@ -1,7 +1,7 @@
 /* ==================== FOOTER STYLES ====================
  * File: 18-footer.css
  * Auto-generated from style.css
- * Date: 2025-10-30 09:05:00
+ * Date: 2025-10-30 11:18:20
  * ========================================================================== */
 
 /* ==================== FOOTER ==================== */
@@ -35,14 +35,14 @@ footer::before {
 /* Footer Widget */
 .footer-widget {
   margin-bottom: 0.5rem;
-  text-align: center;
+  text-align: left;
 }
 
 /* Logo */
 .footer-logo {
   margin-bottom: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 
 .footer-logo img {
@@ -70,23 +70,9 @@ footer h5 {
   font-weight: 600;
   font-size: 0.9rem;
   text-transform: uppercase;
-  margin-bottom: 1rem;
   position: relative;
-  padding-bottom: 0.75rem;
   letter-spacing: 0.5px;
 }
-
-footer h5::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 2px;
-  background: var(--brand-primary);
-}
-
 footer h6 {
   color: var(--brand-primary);
   font-size: 0.875rem;
@@ -117,7 +103,7 @@ footer ul {
 footer ul li {
   margin-bottom: 0.5rem;
   position: relative;
-  text-align: center;
+  text-align: left;
 }
 
 footer ul li:last-child {

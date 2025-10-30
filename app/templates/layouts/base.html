@@ -438,8 +438,8 @@
             <!-- Column 2: Customer Support -->
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h5 class="text-warning text-uppercase fw-semibold mb-4">
-                        <i class="bi bi-headset me-2"></i>Hỗ trợ khách hàng
+                    <h5 class=" text-uppercase fw-semibold mb-4">
+                        Hỗ trợ khách hàng
                     </h5>
 
                     <!-- Hotlines -->
@@ -451,6 +451,10 @@
                         <li class="mb-2"><i class="bi bi-telephone-fill text-warning me-2"></i><span class="text-white">0901 1800 71</span>
                         </li>
                         <li class="mb-2"><i class="bi bi-telephone-fill text-warning me-2"></i><span class="text-white">0901 1800 73</span>
+                        </li>
+                        <li class="mb-2"><i class="bi bi-telephone-fill text-warning me-2"></i><span class="text-white">0901 1800 10</span>
+                        </li>
+                        <li class="mb-2"><i class="bi bi-telephone-fill text-warning me-2"></i><span class="text-white">0901 1800 17</span>
                         </li>
                         <li class="mb-2"><i class="bi bi-clock-fill text-warning me-2"></i><span class="text-light">{{ get_setting('working_hours', '8h - 17h30 (T2-T7)') }}</span>
                         </li>
@@ -521,7 +525,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
                     <h5 class="text-warning text-uppercase fw-semibold mb-4">
-                        <i class="bi bi-building me-2"></i>Về {{ get_setting('website_name', 'BRICON') }}
+                        Về {{ get_setting('website_name', 'BRICON') }}
                     </h5>
                     <ul class="list-unstyled footer-links">
                         <li class="mb-2"><a href="{{ url_for('main.about') }}" class="text-white text-decoration-none">Giới
@@ -535,7 +539,7 @@
                     </ul>
 
                     <h5 class="text-warning text-uppercase fw-semibold mb-3 mt-4">
-                        <i class="bi bi-tools me-2"></i>Sản Phẩm - Dự Án
+                        Sản Phẩm - Dự Án
                     </h5>
                     <ul class="list-unstyled footer-links">
                         {% for category in all_categories[:8] %}
@@ -556,7 +560,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
                     <h5 class="text-warning text-uppercase fw-semibold mb-4">
-                        <i class="bi bi-chat-dots-fill me-2"></i>Kết nối với chúng tôi
+                        Kết nối với chúng tôi
                     </h5>
 
                     <!-- Fanpage Card -->
