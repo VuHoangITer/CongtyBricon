@@ -193,7 +193,35 @@ def create_app(config_class=Config):
     # ==================== BEFORE/AFTER/TEARDOWN ====================
     @app.before_request
     def before_request():
-        """Security checks trước mỗi request"""
+        """
+        ✅ SUBDOMAIN REDIRECT: Chuyển hướng admin sang quantri.bricon.vn
+        ✅ Security checks trước mỗi request
+        """
+        # ==================== SUBDOMAIN SECURITY ====================
+        host = request.host.lower()
+
+        # Bỏ qua static files và favicon
+        if request.path.startswith('/static') or request.path == '/favicon.ico':
+            return None
+
+        # ✅ CHẶN truy cập /admin từ domain chính
+        # CHỈ CHO PHÉP truy cập admin qua subdomain quantri.bricon.vn
+        if 'quantri.' not in host and request.path.startswith('/admin'):
+            # Kiểm tra nếu là localhost -> cho phép (để test local)
+            if 'localhost' in host or '127.0.0.1' in host:
+                return None
+
+            # ❌ CHẶN: Trả về 403 Forbidden
+            return render_template('errors/403.html'), 403
+
+        # ✅ Truy cập từ quantri.* nhưng KHÔNG có /admin -> thêm /admin vào path
+        if 'quantri.' in host and not request.path.startswith('/admin'):
+            # Redirect /login -> /admin/login
+            # Redirect / -> /admin/
+            new_path = '/admin' + request.path
+            return redirect(new_path)
+
+        # ==================== FORCE HTTPS ====================
         # Force HTTPS in production (nếu đang trên Render)
         if os.getenv('FLASK_ENV') == 'production':
             if not request.is_secure and request.headers.get('X-Forwarded-Proto', 'http') != 'https':
@@ -207,18 +235,6 @@ def create_app(config_class=Config):
         ✅ Performance optimizations
         ✅ SKIP CSP cho admin area (CKEditor cần freedom)
         """
-
-        # # ==================== CACHING ====================
-        # if request.path.startswith('/static/'):
-        #     response.cache_control.max_age = 600
-        #     response.cache_control.public = True
-        #     response.cache_control.immutable = True
-        #
-        # # Cache cho CSS/JS/Images
-        # if any(request.path.endswith(ext) for ext in
-        #        ['.css', '.js', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.woff', '.woff2']):
-        #     response.cache_control.max_age = 600
-        #     response.cache_control.public = True
 
         # ==================== SECURITY HEADERS ====================
         # Prevent MIME type sniffing
