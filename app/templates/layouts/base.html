@@ -556,81 +556,81 @@
                 </div>
             </div>
 
-            <!-- Column 4: Fanpage + Social Media -->
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-widget">
-                    <h5 class="text-warning text-uppercase fw-semibold mb-4">
-                        Kết nối với chúng tôi
-                    </h5>
+<!-- Column 4: Fanpage + Social Media -->
+<div class="col-lg-3 col-md-6">
+    <div class="footer-widget">
+        <h5 class="text-warning text-uppercase fw-semibold mb-4">
+            Kết nối với chúng tôi
+        </h5>
 
-                    <!-- Fanpage Card -->
-                    <div class="fanpage-card">
-                        <h6 class="fanpage-card-title text-start text-white">Fanpage</h6>
-                        <div class="fanpage-card-body">
-                            <!-- Logo with Badge -->
-                            <div class="fanpage-image-wrapper">
-                                <div class="fanpage-logo-container">
-                                    <img src="{{ url_for('static', filename='img/avatar_bricon.webp') }}"
-                                         alt="BRICON Logo"
-                                         class="fanpage-logo"
-                                         onerror="this.src='{{ url_for('static', filename='img/avatar_bricon.webp') }}'">
-                                </div>
-                            </div>
+        <!-- Fanpage Card với layout ngang -->
+        <div class="fanpage-card">
+            <div class="fanpage-card-body">
+                <!-- Ảnh bên trái + Info bên phải -->
+                <div class="fanpage-header">
+                    <!-- Logo -->
+                    <div class="fanpage-logo-container">
+                        <img src="{{ url_for('static', filename='img/avatar_bricon.webp') }}"
+                             alt="BRICON Logo"
+                             class="fanpage-logo"
+                             onerror="this.src='{{ url_for('static', filename='img/avatar_bricon.webp') }}'">
+                    </div>
 
-                            <!-- Fanpage Info -->
-                            <div class="fanpage-info">
-                                <a href="{{ get_setting('facebook_url', 'https://www.facebook.com/keoxaydungvachongthambricon') }}"
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   class="fanpage-name text-white text-decoration-none">
-                                    BRICON Việt Nam
-                                </a>
-                                <div class="fanpage-followers">
-                                    <i class="bi bi-people-fill"></i>
-                                    <span>80k người theo dõi</span>
-                                </div>
-                            </div>
-
-                            <!-- Follow Button -->
-                            <a href="{{ get_setting('facebook_url', 'https://www.facebook.com/keoxaydungvachongthambricon') }}"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="btn-follow-fanpage">
-                                <i class="bi bi-facebook"></i>
-                                <span>Theo dõi Trang</span>
-                            </a>
+                    <!-- Thông tin Fanpage -->
+                    <div class="fanpage-info">
+                        <a href="{{ get_setting('facebook_url', 'https://www.facebook.com/keoxaydungvachongthambricon') }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="fanpage-name text-white text-decoration-none">
+                            BRICON Việt Nam
+                        </a>
+                        <div class="fanpage-followers">
+                            <i class="bi bi-people-fill"></i>
+                            <span>80k người theo dõi</span>
                         </div>
                     </div>
-
-                    <!-- Social Media -->
-                    <div class="social-links">
-                        {% if get_setting('facebook_url') %}
-                        <a href="{{ get_setting('facebook_url') }}" target="_blank" rel="noopener noreferrer"
-                           title="Facebook" aria-label="Facebook">
-                            <i class="bi bi-facebook"></i>
-                        </a>
-                        {% endif %}
-                        {% if get_setting('zalo_url') %}
-                        <a href="{{ get_setting('zalo_url') }}" target="_blank" rel="noopener noreferrer" title="Zalo"
-                           aria-label="Zalo">
-                            <i class="bi bi-chat-dots-fill"></i>
-                        </a>
-                        {% endif %}
-                        {% if get_setting('youtube_url') %}
-                        <a href="{{ get_setting('youtube_url') }}" target="_blank" rel="noopener noreferrer"
-                           title="YouTube" aria-label="YouTube">
-                            <i class="bi bi-youtube"></i>
-                        </a>
-                        {% endif %}
-                        {% if get_setting('tiktok_url') %}
-                        <a href="{{ get_setting('tiktok_url') }}" target="_blank" rel="noopener noreferrer"
-                           title="TikTok" aria-label="TikTok">
-                            <i class="bi bi-tiktok"></i>
-                        </a>
-                        {% endif %}
-                    </div>
                 </div>
+
+                <!-- Follow Button -->
+                <a href="{{ get_setting('facebook_url', 'https://www.facebook.com/keoxaydungvachongthambricon') }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn-follow-fanpage">
+                    <i class="bi bi-facebook"></i>
+                    <span>Theo dõi Trang</span>
+                </a>
             </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="social-links">
+            {% if get_setting('facebook_url') %}
+            <a href="{{ get_setting('facebook_url') }}" target="_blank" rel="noopener noreferrer"
+               title="Facebook" aria-label="Facebook">
+                <i class="bi bi-facebook"></i>
+            </a>
+            {% endif %}
+            {% if get_setting('zalo_url') %}
+            <a href="{{ get_setting('zalo_url') }}" target="_blank" rel="noopener noreferrer" title="Zalo"
+               aria-label="Zalo">
+                <i class="bi bi-chat-dots-fill"></i>
+            </a>
+            {% endif %}
+            {% if get_setting('youtube_url') %}
+            <a href="{{ get_setting('youtube_url') }}" target="_blank" rel="noopener noreferrer"
+               title="YouTube" aria-label="YouTube">
+                <i class="bi bi-youtube"></i>
+            </a>
+            {% endif %}
+            {% if get_setting('tiktok_url') %}
+            <a href="{{ get_setting('tiktok_url') }}" target="_blank" rel="noopener noreferrer"
+               title="TikTok" aria-label="TikTok">
+                <i class="bi bi-tiktok"></i>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
         </div>
 

@@ -1834,6 +1834,8 @@ footer .social-links a[aria-label*="Zalo"]:hover {
 }
 
 /* Fanpage Card */
+/* ==================== FANPAGE CARD - HORIZONTAL LAYOUT ==================== */
+
 .fanpage-card {
   position: relative;
   background-image: url('../img/background-fanpage.webp');
@@ -1844,15 +1846,15 @@ footer .social-links a[aria-label*="Zalo"]:hover {
   box-shadow: var(--shadow-sm);
   margin-bottom: 1rem;
   max-width: 320px;
-  overflow: hidden; /* để lớp tối không tràn */
+  overflow: hidden;
 }
 
-/* ✅ Thêm đoạn này ngay sau đó */
+/* Overlay tối */
 .fanpage-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* 👈 chỉnh độ tối: 0.2 = hơi mờ, 0.5 = tối hơn */
+  background: rgba(0, 0, 0, 0.6);
   z-index: 0;
 }
 
@@ -1862,57 +1864,62 @@ footer .social-links a[aria-label*="Zalo"]:hover {
   z-index: 1;
 }
 
-.fanpage-card-title {
-  color: var(--text-dark);
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #f0f0f0;
-}
-
+/* ✅ Layout ngang: ảnh trái + info phải */
 .fanpage-card-body {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.fanpage-image-wrapper {
+/* Container cho ảnh + thông tin nằm ngang */
+.fanpage-header {
   display: flex;
-  justify-content: flex-start;
-  margin-bottom: 0.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.fanpage-logo-container {
+  flex-shrink: 0;
 }
 
 .fanpage-logo {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: var(--radius-full);
   border: 3px solid var(--brand-primary);
   background: white;
   padding: 2px;
+  flex-shrink: 0;
 }
 
 .fanpage-info {
   text-align: left;
+  flex: 1;
 }
 
 .fanpage-name {
-  color: var(--text-dark);
+  color: white;
   font-size: 0.95rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
+  display: block;
 }
 
 .fanpage-followers {
-  color: var(--text-muted);
+  color: #e0e0e0;
   font-size: 0.8rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 0.25rem;
 }
 
+.fanpage-followers i {
+  color: var(--brand-primary);
+}
+
+/* Button theo dõi */
 .btn-follow-fanpage {
   display: flex;
   align-items: center;
@@ -1936,6 +1943,38 @@ footer .social-links a[aria-label*="Zalo"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
   padding-left: 0 !important;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .fanpage-card {
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .fanpage-header {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .fanpage-logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .fanpage-name {
+    font-size: 1rem;
+  }
+
+  .fanpage-followers {
+    font-size: 0.85rem;
+  }
+
+  .btn-follow-fanpage {
+    font-size: 0.9rem;
+    padding: 0.65rem 1rem;
+  }
 }
 
 /* Contact Items */
