@@ -67,22 +67,27 @@ def add_banner():
     form = BannerForm()
 
     if form.validate_on_submit():
-        # Upload ảnh Desktop
-        image_path = get_image_from_form(form.image, 'image', folder='banners')
+        # ✅ ĐỌC ẢNH DESKTOP - ƯU TIÊN MEDIA LIBRARY
+        image_path = request.form.get('selected_image_path')  # Từ Media Library
+        if not image_path:
+            # Nếu không có, đọc từ upload
+            image_path = get_image_from_form(form.image, 'image', folder='banners')
+
         if not image_path:
             flash('Vui lòng chọn hoặc upload ảnh banner!', 'danger')
             return render_template('admin/banner/banner_form.html', form=form, title='Thêm banner')
 
-        # ✅ Upload ảnh Mobile (nếu có)
-        image_mobile_path = None
-        if form.image_mobile.data:
+        # ✅ ĐỌC ẢNH MOBILE - ƯU TIÊN MEDIA LIBRARY
+        image_mobile_path = request.form.get('selected_image_mobile_path')  # Từ Media Library
+        if not image_mobile_path and form.image_mobile.data:
+            # Nếu không có từ library, đọc từ upload
             image_mobile_path = get_image_from_form(form.image_mobile, 'image_mobile', folder='banners/mobile')
 
         banner = Banner(
             title=form.title.data,
             subtitle=form.subtitle.data,
             image=image_path,
-            image_mobile=image_mobile_path,  # ✅ Lưu ảnh mobile
+            image_mobile=image_mobile_path,
             link=form.link.data,
             button_text=form.button_text.data,
             order=form.order.data or 0,
@@ -118,24 +123,34 @@ def edit_banner(id):
         # ✅ XỬ LÝ XÓA ẢNH DESKTOP
         delete_desktop = request.form.get('delete_desktop_image') == '1'
         if delete_desktop:
-            banner.image = None  # Xóa đường dẫn trong DB
+            banner.image = None
             flash('Đã xóa ảnh Desktop', 'info')
 
         # ✅ XỬ LÝ XÓA ẢNH MOBILE
         delete_mobile = request.form.get('delete_mobile_image') == '1'
         if delete_mobile:
-            banner.image_mobile = None  # Xóa đường dẫn trong DB
+            banner.image_mobile = None
             flash('Đã xóa ảnh Mobile', 'info')
 
-        # Cập nhật ảnh Desktop (nếu có upload mới)
+        # ✅ CẬP NHẬT ẢNH DESKTOP
         if not delete_desktop:
-            new_image = get_image_from_form(form.image, 'image', folder='banners')
+            # Ưu tiên đọc từ Media Library
+            new_image = request.form.get('selected_image_path')
+            if not new_image:
+                # Nếu không có, đọc từ upload
+                new_image = get_image_from_form(form.image, 'image', folder='banners')
+
             if new_image:
                 banner.image = new_image
 
-        # ✅ Cập nhật ảnh Mobile (nếu có upload mới)
+        # ✅ CẬP NHẬT ẢNH MOBILE
         if not delete_mobile:
-            new_image_mobile = get_image_from_form(form.image_mobile, 'image_mobile', folder='banners/mobile')
+            # Ưu tiên đọc từ Media Library
+            new_image_mobile = request.form.get('selected_image_mobile_path')
+            if not new_image_mobile:
+                # Nếu không có, đọc từ upload
+                new_image_mobile = get_image_from_form(form.image_mobile, 'image_mobile', folder='banners/mobile')
+
             if new_image_mobile:
                 banner.image_mobile = new_image_mobile
 
@@ -152,7 +167,6 @@ def edit_banner(id):
         return redirect(url_for('admin.banners'))
 
     return render_template('admin/banner/banner_form.html', form=form, title='Sửa banner', banner=banner)
-
 
 
 # ==================== DELETE ====================

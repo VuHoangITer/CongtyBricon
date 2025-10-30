@@ -34,7 +34,7 @@
                     </label>
                     <div class="input-group">
                         {{ form.image(class="form-control", id="image") }}
-                        <button type="button" class="btn btn-warning" onclick="openMediaPicker('image', 'imagePreview')">
+                        <button type="button" class="btn btn-warning" onclick="openDesktopPicker()">
                             <i class="bi bi-images"></i> Chọn từ thư viện
                         </button>
                     </div>
@@ -78,7 +78,7 @@
                     </label>
                     <div class="input-group">
                         {{ form.image_mobile(class="form-control", id="image_mobile") }}
-                        <button type="button" class="btn btn-info" onclick="openMediaPicker('image_mobile', 'imageMobilePreview')">
+                        <button type="button" class="btn btn-info" onclick="openMobilePicker()">
                             <i class="bi bi-images"></i> Chọn từ thư viện
                         </button>
                     </div>
@@ -167,7 +167,61 @@
 {% include 'components/media_picker.html' %}
 
 <script>
-// ✅ XÓA ẢNH (DESKTOP HOẶC MOBILE)
+// ==================== BIẾN GLOBAL ĐỂ PHÂN BIỆT DESKTOP/MOBILE ====================
+let currentPickerType = 'desktop'; // 'desktop' hoặc 'mobile'
+
+// ==================== MỞ MEDIA PICKER CHO DESKTOP ====================
+function openDesktopPicker() {
+    currentPickerType = 'desktop';
+    openMediaPicker('image', 'imagePreview');
+}
+
+// ==================== MỞ MEDIA PICKER CHO MOBILE ====================
+function openMobilePicker() {
+    currentPickerType = 'mobile';
+    openMediaPicker('image_mobile', 'imageMobilePreview');
+}
+
+// ==================== OVERRIDE CALLBACK TỪ MEDIA PICKER ====================
+// Hàm này sẽ được gọi khi user chọn ảnh từ Media Library
+window.handleMediaSelection = function(imagePath) {
+    if (currentPickerType === 'desktop') {
+        // ✅ Cập nhật Desktop - CHỈ UPDATE HIDDEN INPUT và PREVIEW
+        // ❌ KHÔNG BAO GIỜ set value cho <input type="file">
+        document.getElementById('selectedImagePath').value = imagePath;
+
+        const preview = document.getElementById('imagePreview');
+        preview.src = imagePath;
+        preview.style.display = 'block';
+
+        // Reset delete flag
+        document.getElementById('deleteDesktopImage').value = '0';
+
+        console.log('✅ Desktop image selected:', imagePath);
+
+    } else if (currentPickerType === 'mobile') {
+        // ✅ Cập nhật Mobile - CHỈ UPDATE HIDDEN INPUT và PREVIEW
+        // ❌ KHÔNG BAO GIỜ set value cho <input type="file">
+        document.getElementById('selectedImageMobilePath').value = imagePath;
+
+        const preview = document.getElementById('imageMobilePreview');
+        preview.src = imagePath;
+        preview.style.display = 'block';
+
+        // Reset delete flag
+        document.getElementById('deleteMobileImage').value = '0';
+
+        console.log('✅ Mobile image selected:', imagePath);
+    }
+
+    // Đóng modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('mediaPickerModal'));
+    if (modal) {
+        modal.hide();
+    }
+};
+
+// ==================== XÓA ẢNH ====================
 function removeImage(type) {
     if (!confirm('Bạn có chắc muốn xóa ảnh này?')) {
         return;
@@ -185,6 +239,8 @@ function removeImage(type) {
         const container = document.getElementById('desktopImageContainer');
         container.innerHTML = '<img id="imagePreview" src="" alt="Desktop Preview" class="img-thumbnail" style="max-width: 100%; max-height: 200px; display: none;">';
 
+        console.log('🗑️ Desktop image removed');
+
     } else if (type === 'mobile') {
         const preview = document.getElementById('imageMobilePreview');
         preview.src = '';
@@ -196,25 +252,25 @@ function removeImage(type) {
 
         const container = document.getElementById('mobileImageContainer');
         container.innerHTML = '<img id="imageMobilePreview" src="" alt="Mobile Preview" class="img-thumbnail" style="max-width: 300px; max-height: 200px; display: none;">';
+
+        console.log('🗑️ Mobile image removed');
     }
 }
 
-// ✅ QUAN TRỌNG: KHÔNG CẦN override openMediaPicker nữa vì đã có trong media_picker_modal.html
-// Chỉ cần đảm bảo media_picker_modal.html được include là đủ
-
-// ✅ THÊM: Đảm bảo hidden input name đúng để backend nhận được
+// ==================== DOM READY ====================
 document.addEventListener('DOMContentLoaded', function() {
-    // Đảm bảo hidden input cho desktop có name đúng
+    // Đảm bảo hidden input có name đúng
     const desktopHidden = document.getElementById('selectedImagePath');
     if (desktopHidden && !desktopHidden.name) {
         desktopHidden.name = 'selected_image_path';
     }
 
-    // Đảm bảo hidden input cho mobile có name đúng
     const mobileHidden = document.getElementById('selectedImageMobilePath');
     if (mobileHidden && !mobileHidden.name) {
         mobileHidden.name = 'selected_image_mobile_path';
     }
+
+    console.log('✅ Banner form initialized');
 });
 </script>
 

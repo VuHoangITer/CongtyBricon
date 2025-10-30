@@ -189,10 +189,7 @@ function renderMediaGrid(mediaList) {
     }
 
     grid.innerHTML = mediaList.map(media => {
-        // ✅ CRITICAL: Đảm bảo filepath không bị thêm "/" ở đầu URL Cloudinary
         let imageSrc = media.filepath;
-
-        // Debug log
         console.log('Media item:', media.original_filename, 'filepath:', imageSrc);
 
         return `
@@ -216,7 +213,6 @@ function renderMediaGrid(mediaList) {
         `;
     }).join('');
 
-    // Attach click handlers
     document.querySelectorAll('.media-item').forEach(item => {
         item.addEventListener('click', function() {
             selectMedia(this.dataset.id, this.dataset.path);
@@ -267,23 +263,16 @@ document.addEventListener('DOMContentLoaded', function() {
     selectBtn.addEventListener('click', function() {
         if (!selectedMediaPath || !currentTargetInput) return;
 
-        // ✅ CRITICAL FIX: Trim và kiểm tra kỹ URL
+        // ✅ Chuẩn hóa đường dẫn
         let finalPath = selectedMediaPath.trim();
-
         console.log('[Media Picker] Raw selected path:', selectedMediaPath);
 
-        // ✅ BẮT BUỘC: Kiểm tra Cloudinary URL TRƯỚC KHI làm gì khác
         if (finalPath.startsWith('http://') || finalPath.startsWith('https://')) {
-            // Giữ nguyên 100%, không thêm gì cả
             console.log('[Media Picker] Cloudinary URL detected, keeping as-is');
-        }
-        // ⚠️ Trường hợp đặc biệt: Nếu có "/http" thì loại bỏ "/"
-        else if (finalPath.startsWith('/http://') || finalPath.startsWith('/https://')) {
-            finalPath = finalPath.substring(1); // Bỏ "/" ở đầu
+        } else if (finalPath.startsWith('/http://') || finalPath.startsWith('/https://')) {
+            finalPath = finalPath.substring(1);
             console.log('[Media Picker] Fixed malformed Cloudinary URL:', finalPath);
-        }
-        // Nếu là đường dẫn local, chuẩn hóa
-        else {
+        } else {
             if (!finalPath.startsWith('/static/')) {
                 if (finalPath.startsWith('static/')) {
                     finalPath = '/' + finalPath;
@@ -295,6 +284,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             console.log('[Media Picker] Local path normalized:', finalPath);
         }
+
+        // ✅ CRITICAL FIX: Kiểm tra xem có callback custom không
+        if (typeof window.handleMediaSelection === 'function') {
+            console.log('[Media Picker] Using custom callback (handleMediaSelection)');
+            window.handleMediaSelection(finalPath);
+
+            // Đóng modal
+            bootstrap.Modal.getInstance(document.getElementById('mediaPickerModal')).hide();
+            return;
+        }
+
+        // ✅ Fallback: Logic cũ (cho các trang khác không dùng banner form)
+        console.log('[Media Picker] Using default logic');
 
         // Tìm hoặc tạo hidden input
         let hiddenInput = document.getElementById('selectedImagePath');
@@ -334,7 +336,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Đóng modal
         bootstrap.Modal.getInstance(document.getElementById('mediaPickerModal')).hide();
 
-        // ✅ Log để debug
         console.log('✅ [Media Picker] Image selected successfully!');
         console.log('   - Final path:', finalPath);
         console.log('   - Is Cloudinary:', finalPath.startsWith('http'));
