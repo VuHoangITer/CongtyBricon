@@ -1,7 +1,7 @@
 from flask import Flask, g, request, redirect, render_template, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager
 from flask_compress import Compress
 from app.config import Config
 import cloudinary
@@ -40,9 +40,6 @@ def create_app(config_class=Config):
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # CSRF protection
     app.config['PERMANENT_SESSION_LIFETIME'] = 86400  # 24 hours
 
-    # ✅ SESSION COOKIE DOMAIN - Cho phép share session giữa subdomain
-    app.config['SESSION_COOKIE_DOMAIN'] = '.bricon.vn'  # Dot prefix để work với subdomains
-
     # Upload Security
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max
 
@@ -64,7 +61,6 @@ def create_app(config_class=Config):
     )
 
     # ==================== FLASK-LOGIN ====================
-    # ✅ Redirect về quantri subdomain khi chưa đăng nhập
     login_manager.login_view = 'admin.login'
     login_manager.login_message = 'Vui lòng đăng nhập để truy cập trang này.'
     login_manager.login_message_category = 'warning'
@@ -197,40 +193,8 @@ def create_app(config_class=Config):
     # ==================== BEFORE/AFTER/TEARDOWN ====================
     @app.before_request
     def before_request():
-        """
-        ✅ SUBDOMAIN SECURITY: CHỈ cho phép login qua quantri subdomain
-        ✅ Sau khi đăng nhập → Cho phép truy cập admin từ domain chính
-        """
-        host = request.host.lower()
-
-        # Bỏ qua static files và favicon
-        if request.path.startswith('/static') or request.path == '/favicon.ico':
-            return None
-
-        # Kiểm tra môi trường localhost (cho phép test)
-        is_local = 'localhost' in host or '127.0.0.1' in host
-        is_admin_subdomain = 'quantri.' in host
-        is_admin_path = request.path.startswith('/admin')
-
-        # ==================== LOGIC SUBDOMAIN ====================
-
-        # 1️⃣ Nếu đang ở quantri subdomain nhưng KHÔNG có /admin path
-        #    → Thêm /admin vào path
-        if is_admin_subdomain and not is_admin_path:
-            new_path = '/admin' + request.path
-            return redirect(new_path)
-
-        # 2️⃣ ❌ CHẶN HOÀN TOÀN /admin từ domain chính (trừ khi đã đăng nhập)
-        if is_admin_path and not is_admin_subdomain and not is_local:
-            # Kiểm tra xem user đã đăng nhập chưa
-            if current_user.is_authenticated:
-                # ✅ ĐÃ ĐĂNG NHẬP → Cho phép truy cập
-                return None
-            else:
-                # ❌ CHƯA ĐĂNG NHẬP → Trả về 403 Forbidden
-                return render_template('errors/403.html'), 403
-
-        # ==================== FORCE HTTPS ====================
+        """Security checks trước mỗi request"""
+        # Force HTTPS in production (nếu đang trên Render)
         if os.getenv('FLASK_ENV') == 'production':
             if not request.is_secure and request.headers.get('X-Forwarded-Proto', 'http') != 'https':
                 url = request.url.replace('http://', 'https://', 1)
@@ -243,6 +207,18 @@ def create_app(config_class=Config):
         ✅ Performance optimizations
         ✅ SKIP CSP cho admin area (CKEditor cần freedom)
         """
+
+        # # ==================== CACHING ====================
+        # if request.path.startswith('/static/'):
+        #     response.cache_control.max_age = 600
+        #     response.cache_control.public = True
+        #     response.cache_control.immutable = True
+        #
+        # # Cache cho CSS/JS/Images
+        # if any(request.path.endswith(ext) for ext in
+        #        ['.css', '.js', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.woff', '.woff2']):
+        #     response.cache_control.max_age = 600
+        #     response.cache_control.public = True
 
         # ==================== SECURITY HEADERS ====================
         # Prevent MIME type sniffing
