@@ -1158,7 +1158,7 @@ section h2 {
 }
 
 /* ==================== MOBILE BLOG CAROUSEL  ==================== */
-/* ==================== CAROUSEL WRAPPER ==================== */
+/* ==================== CAROUSEL STRUCTURE ==================== */
 .blog-carousel-wrapper {
   position: relative;
   max-width: 1200px;
@@ -1195,25 +1195,18 @@ section h2 {
   }
 }
 
-/* PC: 3 cards */
-@media (min-width: 992px) {
-  .blog-carousel-slide {
-    width: 33.333333%;
-  }
-}
-
-/* ==================== NAVIGATION BUTTONS - MỜ & OVERLAY ==================== */
+/* ==================== NAVIGATION BUTTONS ==================== */
 .blog-carousel-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 45px;
   height: 45px;
-  background: #808080;
+  background: rgba(128, 128, 128, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-full);
+  border-radius: 50%;
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.2rem;
   display: flex;
@@ -1222,23 +1215,16 @@ section h2 {
   cursor: pointer;
   z-index: 10;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  transition: var(--transition-base);
+  transition: all 0.3s ease;
   opacity: 0.6;
 }
 
 .blog-carousel-nav-btn:hover {
   background: rgba(255, 193, 7, 0.8);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 5px 20px rgba(255, 193, 7, 0.4);
   opacity: 1;
-  color: var(--text-dark);
-}
-
-.blog-carousel-nav-btn:disabled {
-  opacity: 0.2;
-  cursor: not-allowed;
+  color: #000;
 }
 
 .blog-carousel-prev {
@@ -1264,29 +1250,27 @@ section h2 {
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .blog-carousel-prev {
-    left: 8px;
-  }
-  .blog-carousel-next {
-    right: 8px;
-  }
-}
+/* ==================== VISIBILITY CONTROL - CHỈ DÙNG CSS ==================== */
 
-/* ==================== HIDE ORIGINAL GRID ON CAROUSEL MODE ==================== */
-@media (max-width: 991px) {
-  #featured-blogs-section .row.g-4:not(.blog-carousel-track) {
-    display: none;
-  }
-}
-/* ==================== DESKTOP: ẨN CAROUSEL, HIỆN GRID ==================== */
+/* Desktop (>991px): Hiện grid, ẩn carousel */
 @media (min-width: 992px) {
   .blog-carousel-wrapper {
     display: none;
   }
 
   #featured-blogs-section .row.g-4 {
-    display: flex;
+    display: flex !important;
+  }
+}
+
+/* Mobile/Tablet (≤991px): Hiện carousel, ẩn grid */
+@media (max-width: 991px) {
+  .blog-carousel-wrapper {
+    display: block !important;
+  }
+
+  #featured-blogs-section .row.g-4 {
+    display: none !important;
   }
 }
 

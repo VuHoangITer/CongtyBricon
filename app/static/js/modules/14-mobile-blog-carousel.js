@@ -2,7 +2,7 @@
  * ==================== CAROUSEL BLOG MOBILE/TABLET ====================
  * File: 14-mobile-blog-carousel.js
  * Tạo tự động từ: main.js
- * Ngày tạo: 02/11/2025 21:02:12
+ * Ngày tạo: 02/11/2025 21:52:42
  * ==========================================================================
  * 
 
@@ -61,33 +61,27 @@
 (function() {
   'use strict';
 
-  // ==================== NAMESPACE RIÊNG ==================== //
+  // ==================== NAMESPACE ==================== //
   window.BlogCarousel = window.BlogCarousel || {};
   const BC = window.BlogCarousel;
 
   // ==================== STATE ==================== //
   BC.state = {
-    carouselInstance: null,
-    isInitialized: false
+    isCreated: false,
+    carouselInstance: null
   };
 
   // ==================== CONFIG ==================== //
   BC.config = {
-    breakpoint: 991,
     transitionDuration: 500,
     dragThreshold: 50
   };
 
-  // ==================== CHECK BREAKPOINT ==================== //
-  BC.shouldActivate = function() {
-    return window.innerWidth <= this.config.breakpoint;
-  };
-
-  // ==================== KHỞI TẠO CAROUSEL ==================== //
-  BC.init = function() {
-    // Kiểm tra breakpoint
-    if (!this.shouldActivate()) {
-      console.log('📱 Blog Carousel: Skipped (Desktop mode - using grid)');
+  // ==================== TẠO CAROUSEL 1 LẦN DUY NHẤT ==================== //
+  BC.createOnce = function() {
+    // Đã tạo rồi thì thôi
+    if (this.state.isCreated) {
+      console.log('📱 Blog Carousel: Already created');
       return;
     }
 
@@ -109,21 +103,7 @@
       return;
     }
 
-    // Kiểm tra xem đã có carousel chưa
-    if (blogSection.querySelector('.blog-carousel-wrapper')) {
-      console.log('📱 Blog Carousel: Already exists');
-      return;
-    }
-
     // Tạo carousel structure
-    this.createCarouselStructure(blogSection, originalGrid, blogCards);
-
-    console.log(`✅ Blog Carousel: Initialized with ${blogCards.length} cards (Mobile/Tablet mode)`);
-  };
-
-  // ==================== TẠO CẤU TRÚC CAROUSEL ==================== //
-  BC.createCarouselStructure = function(blogSection, originalGrid, blogCards) {
-    // Tạo wrapper
     const wrapper = document.createElement('div');
     wrapper.className = 'blog-carousel-wrapper';
 
@@ -132,9 +112,8 @@
 
     const track = document.createElement('div');
     track.className = 'blog-carousel-track';
-    track.id = 'blogCarouselTrack';
 
-    // Chuyển blog cards vào carousel
+    // Clone blog cards vào carousel
     blogCards.forEach((card) => {
       const slide = document.createElement('div');
       slide.className = 'blog-carousel-slide';
@@ -145,13 +124,11 @@
     // Tạo navigation buttons
     const prevBtn = document.createElement('button');
     prevBtn.className = 'blog-carousel-nav-btn blog-carousel-prev';
-    prevBtn.id = 'blogCarouselPrev';
     prevBtn.innerHTML = '<i class="bi bi-chevron-left"></i>';
     prevBtn.setAttribute('aria-label', 'Previous');
 
     const nextBtn = document.createElement('button');
     nextBtn.className = 'blog-carousel-nav-btn blog-carousel-next';
-    nextBtn.id = 'blogCarouselNext';
     nextBtn.innerHTML = '<i class="bi bi-chevron-right"></i>';
     nextBtn.setAttribute('aria-label', 'Next');
 
@@ -161,22 +138,25 @@
     wrapper.appendChild(prevBtn);
     wrapper.appendChild(nextBtn);
 
-    // Thêm carousel vào DOM
+    // Thêm vào DOM
     originalGrid.parentNode.insertBefore(wrapper, originalGrid);
 
-    // Ẩn grid gốc
-    originalGrid.style.display = 'none';
+    // Setup carousel logic
+    this.state.carouselInstance = this.setupCarousel(track, container, prevBtn, nextBtn);
+    this.state.isCreated = true;
 
-    // Khởi tạo carousel logic
-    this.state.carouselInstance = this.setupCarousel(track, prevBtn, nextBtn);
-    this.state.isInitialized = true;
+    console.log(`✅ Blog Carousel: Created with ${blogCards.length} cards (PERMANENT)`);
   };
 
   // ==================== SETUP CAROUSEL LOGIC ==================== //
-  BC.setupCarousel = function(track, prevBtn, nextBtn) {
+  BC.setupCarousel = function(track, container, prevBtn, nextBtn) {
     const slides = track.querySelectorAll('.blog-carousel-slide');
     let currentIndex = 0;
-    let itemsPerView = 2;
+    let itemsPerView = 1;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
 
     function updateItemsPerView() {
       const width = window.innerWidth;
@@ -187,35 +167,135 @@
       }
     }
 
-    function updateCarousel() {
-      const slideWidth = track.parentElement.offsetWidth / itemsPerView;
+    function getSlideWidth() {
+      return container.offsetWidth / itemsPerView;
+    }
+
+    function updateCarousel(animate = true) {
+      const slideWidth = getSlideWidth();
       const offset = -currentIndex * slideWidth;
+
+      if (animate) {
+        track.style.transition = `transform ${BC.config.transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      } else {
+        track.style.transition = 'none';
+      }
+
       track.style.transform = `translateX(${offset}px)`;
-      track.style.transition = `transform ${BC.config.transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      currentTranslate = offset;
+      prevTranslate = offset;
+
+      // Update buttons state
+      updateButtonsState();
+    }
+
+    function updateButtonsState() {
+      const maxIndex = slides.length - itemsPerView;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= maxIndex;
     }
 
     function next() {
       const maxIndex = slides.length - itemsPerView;
       if (currentIndex < maxIndex) {
         currentIndex++;
-      } else {
-        currentIndex = 0; // Loop về đầu
+        updateCarousel();
       }
-      updateCarousel();
     }
 
     function prev() {
       if (currentIndex > 0) {
         currentIndex--;
-      } else {
-        currentIndex = slides.length - itemsPerView; // Loop về cuối
+        updateCarousel();
       }
+    }
+
+    function goToSlide(index) {
+      const maxIndex = slides.length - itemsPerView;
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
       updateCarousel();
     }
 
-    // Event listeners
+    // ==================== TOUCH/DRAG EVENTS ==================== //
+    function getPositionX(event) {
+      return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+
+    function dragStart(event) {
+      isDragging = true;
+      startPos = getPositionX(event);
+      track.style.cursor = 'grabbing';
+      track.style.transition = 'none';
+    }
+
+    function dragMove(event) {
+      if (!isDragging) return;
+
+      const currentPosition = getPositionX(event);
+      const diff = currentPosition - startPos;
+      currentTranslate = prevTranslate + diff;
+
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function dragEnd() {
+      if (!isDragging) return;
+
+      isDragging = false;
+      track.style.cursor = 'grab';
+
+      const movedBy = currentTranslate - prevTranslate;
+
+      // Nếu kéo đủ xa (threshold), chuyển slide
+      if (Math.abs(movedBy) > BC.config.dragThreshold) {
+        if (movedBy < 0) {
+          // Kéo sang trái = next
+          next();
+        } else {
+          // Kéo sang phải = prev
+          prev();
+        }
+      } else {
+        // Không đủ xa, quay về vị trí cũ
+        updateCarousel();
+      }
+    }
+
+    // Mouse events
+    track.addEventListener('mousedown', dragStart);
+    track.addEventListener('mousemove', dragMove);
+    track.addEventListener('mouseup', dragEnd);
+    track.addEventListener('mouseleave', dragEnd);
+
+    // Touch events
+    track.addEventListener('touchstart', dragStart, { passive: true });
+    track.addEventListener('touchmove', dragMove, { passive: true });
+    track.addEventListener('touchend', dragEnd);
+
+    // Prevent click when dragging
+    track.addEventListener('click', function(e) {
+      if (Math.abs(currentTranslate - prevTranslate) > 5) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    // Button events
     prevBtn.addEventListener('click', prev);
     nextBtn.addEventListener('click', next);
+
+    // Cursor style
+    track.style.cursor = 'grab';
+
+    // Resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        updateItemsPerView();
+        goToSlide(currentIndex); // Recalculate position
+      }, 250);
+    });
 
     // Initialize
     updateItemsPerView();
@@ -224,69 +304,32 @@
     return {
       next,
       prev,
+      goToSlide,
       updateItemsPerView,
       updateCarousel,
       getCurrentIndex: () => currentIndex
     };
   };
 
-  // ==================== DESTROY CAROUSEL ==================== //
-  BC.destroy = function() {
-    if (!this.state.isInitialized) return;
-
-    const blogSection = document.querySelector('#featured-blogs-section');
-    if (!blogSection) return;
-
-    const wrapper = blogSection.querySelector('.blog-carousel-wrapper');
-    const originalGrid = blogSection.querySelector('.row.g-4');
-
-    if (wrapper) {
-      wrapper.remove();
-    }
-
-    if (originalGrid) {
-      originalGrid.style.display = '';
-    }
-
-    this.state.carouselInstance = null;
-    this.state.isInitialized = false;
-
-    console.log('📱 Blog Carousel: Destroyed (Desktop mode - using grid)');
-  };
-
-  // ==================== HANDLE RESIZE ==================== //
-  BC.handleResize = function() {
-    if (this.shouldActivate() && !this.state.isInitialized) {
-      // Desktop → Mobile/Tablet: Tạo carousel
-      this.init();
-    } else if (!this.shouldActivate() && this.state.isInitialized) {
-      // Mobile/Tablet → Desktop: Destroy carousel
-      this.destroy();
-    } else if (this.state.isInitialized && this.state.carouselInstance) {
-      // Vẫn ở Mobile/Tablet: Update carousel
-      this.state.carouselInstance.updateItemsPerView();
-      this.state.carouselInstance.updateCarousel();
-    }
-  };
-
   // ==================== AUTO INIT ==================== //
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => BC.init());
-  } else {
-    BC.init();
+  function init() {
+    BC.createOnce();
   }
 
-  // ==================== HANDLE RESIZE WITH DEBOUNCE ==================== //
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => BC.handleResize(), 250);
+  // DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // pageshow - Quan trọng cho bfcache
+  window.addEventListener('pageshow', function(event) {
+    console.log('📱 pageshow:', event.persisted ? 'from cache' : 'normal load');
+    init();
   });
 
-  // ==================== CLEANUP ==================== //
-  window.addEventListener('beforeunload', () => BC.destroy());
-
-  console.log('📦 Blog Carousel: Module loaded with namespace');
+  console.log('📦 Blog Carousel: Module loaded with touch/drag support');
 
 })();
 
