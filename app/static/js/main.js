@@ -1263,15 +1263,14 @@ window.addEventListener('beforeunload', function() {
 
   // ==================== CONFIG ==================== //
   BC.config = {
-    transitionDuration: 500,
-    dragThreshold: 50
+    transitionDuration: 400,
+    snapThreshold: 0.3  // Kéo 30% thì snap sang slide mới
   };
 
   // ==================== TẠO CAROUSEL 1 LẦN DUY NHẤT ==================== //
   BC.createOnce = function() {
-    // Đã tạo rồi thì thôi
     if (this.state.isCreated) {
-      console.log('📱 Blog Carousel: Already created');
+      console.log('📱 Blog Carousel: Already exists, ensuring visibility');
       return;
     }
 
@@ -1347,6 +1346,7 @@ window.addEventListener('beforeunload', function() {
     let startPos = 0;
     let currentTranslate = 0;
     let prevTranslate = 0;
+    let dragDistance = 0;
 
     function updateItemsPerView() {
       const width = window.innerWidth;
@@ -1366,7 +1366,7 @@ window.addEventListener('beforeunload', function() {
       const offset = -currentIndex * slideWidth;
 
       if (animate) {
-        track.style.transition = `transform ${BC.config.transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+        track.style.transition = `transform ${BC.config.transitionDuration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
       } else {
         track.style.transition = 'none';
       }
@@ -1374,30 +1374,25 @@ window.addEventListener('beforeunload', function() {
       track.style.transform = `translateX(${offset}px)`;
       currentTranslate = offset;
       prevTranslate = offset;
-
-      // Update buttons state
-      updateButtonsState();
-    }
-
-    function updateButtonsState() {
-      const maxIndex = slides.length - itemsPerView;
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex >= maxIndex;
     }
 
     function next() {
       const maxIndex = slides.length - itemsPerView;
       if (currentIndex < maxIndex) {
         currentIndex++;
-        updateCarousel();
+      } else {
+        currentIndex = 0; // LOOP về đầu
       }
+      updateCarousel();
     }
 
     function prev() {
       if (currentIndex > 0) {
         currentIndex--;
-        updateCarousel();
+      } else {
+        currentIndex = slides.length - itemsPerView; // LOOP về cuối
       }
+      updateCarousel();
     }
 
     function goToSlide(index) {
@@ -1414,18 +1409,29 @@ window.addEventListener('beforeunload', function() {
     function dragStart(event) {
       isDragging = true;
       startPos = getPositionX(event);
+      dragDistance = 0;
       track.style.cursor = 'grabbing';
       track.style.transition = 'none';
+
+      // Prevent default on touch to avoid scroll
+      if (event.type === 'touchstart') {
+        // Don't prevent default - let it scroll naturally
+      }
     }
 
     function dragMove(event) {
       if (!isDragging) return;
 
       const currentPosition = getPositionX(event);
-      const diff = currentPosition - startPos;
-      currentTranslate = prevTranslate + diff;
+      dragDistance = currentPosition - startPos;
+      currentTranslate = prevTranslate + dragDistance;
 
       track.style.transform = `translateX(${currentTranslate}px)`;
+
+      // Prevent scroll when dragging horizontally
+      if (Math.abs(dragDistance) > 10) {
+        event.preventDefault();
+      }
     }
 
     function dragEnd() {
@@ -1434,10 +1440,12 @@ window.addEventListener('beforeunload', function() {
       isDragging = false;
       track.style.cursor = 'grab';
 
-      const movedBy = currentTranslate - prevTranslate;
+      const slideWidth = getSlideWidth();
+      const movedBy = dragDistance;
+      const movePercentage = Math.abs(movedBy) / slideWidth;
 
-      // Nếu kéo đủ xa (threshold), chuyển slide
-      if (Math.abs(movedBy) > BC.config.dragThreshold) {
+      // SMART SNAP: Kéo > 30% slide width hoặc > 50px → chuyển slide
+      if (movePercentage > BC.config.snapThreshold || Math.abs(movedBy) > 50) {
         if (movedBy < 0) {
           // Kéo sang trái = next
           next();
@@ -1446,10 +1454,12 @@ window.addEventListener('beforeunload', function() {
           prev();
         }
       } else {
-        // Không đủ xa, quay về vị trí cũ
+        // Snap về vị trí hiện tại
         updateCarousel();
       }
     }
+
+    // ==================== EVENT LISTENERS ==================== //
 
     // Mouse events
     track.addEventListener('mousedown', dragStart);
@@ -1457,25 +1467,56 @@ window.addEventListener('beforeunload', function() {
     track.addEventListener('mouseup', dragEnd);
     track.addEventListener('mouseleave', dragEnd);
 
-    // Touch events
+    // Touch events - passive: false để có thể preventDefault
     track.addEventListener('touchstart', dragStart, { passive: true });
-    track.addEventListener('touchmove', dragMove, { passive: true });
+    track.addEventListener('touchmove', dragMove, { passive: false });
     track.addEventListener('touchend', dragEnd);
 
-    // Prevent click when dragging
+    // Prevent click khi đang drag
     track.addEventListener('click', function(e) {
-      if (Math.abs(currentTranslate - prevTranslate) > 5) {
+      if (Math.abs(dragDistance) > 5) {
         e.preventDefault();
         e.stopPropagation();
+        return false;
       }
     }, true);
 
+    // Prevent link click during drag
+    track.addEventListener('mousedown', function(e) {
+      dragDistance = 0;
+    });
+
+    track.addEventListener('touchstart', function(e) {
+      dragDistance = 0;
+    });
+
     // Button events
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      prev();
+    });
+
+    nextBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      next();
+    });
 
     // Cursor style
     track.style.cursor = 'grab';
+    track.style.userSelect = 'none';
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+      if (!container.closest('.blog-carousel-wrapper')) return;
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prev();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        next();
+      }
+    });
 
     // Resize handler
     let resizeTimeout;
@@ -1483,7 +1524,7 @@ window.addEventListener('beforeunload', function() {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         updateItemsPerView();
-        goToSlide(currentIndex); // Recalculate position
+        goToSlide(currentIndex);
       }, 250);
     });
 
@@ -1506,20 +1547,18 @@ window.addEventListener('beforeunload', function() {
     BC.createOnce();
   }
 
-  // DOMContentLoaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // pageshow - Quan trọng cho bfcache
   window.addEventListener('pageshow', function(event) {
     console.log('📱 pageshow:', event.persisted ? 'from cache' : 'normal load');
     init();
   });
 
-  console.log('📦 Blog Carousel: Module loaded with touch/drag support');
+  console.log('📦 Blog Carousel: Module loaded (Smooth drag + Infinite loop)');
 
 })();
 
