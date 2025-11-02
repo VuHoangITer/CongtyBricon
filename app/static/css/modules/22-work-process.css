@@ -1,7 +1,7 @@
 /* ==================== WORK PROCESS SECTION ====================
  * File: 22-work-process.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== WORK PROCESS SECTION ==================== */
@@ -45,7 +45,11 @@
   right: 10px;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-secondary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-secondary) 0%,
+    var(--brand-secondary-dark) 100%
+  );
   color: white;
   border-radius: var(--radius-full);
   display: flex;
@@ -73,7 +77,11 @@
 
 .process-step:hover .process-icon {
   transform: rotate(360deg) scale(1.1);
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary) 0%,
+    var(--brand-primary-dark) 100%
+  );
 }
 
 .process-icon i {
@@ -134,7 +142,7 @@
 
   /* Connecting Arrows - Desktop Only */
   .process-step::after {
-    content: '→';
+    content: "→";
     position: absolute;
     top: 80px;
     right: -2.5rem;
@@ -152,7 +160,8 @@
 }
 
 @keyframes arrow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
     transform: translateX(0);
   }

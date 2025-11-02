@@ -1,144 +1,150 @@
 /* ==================== MOBILE BLOG CAROUSEL ====================
  * File: 13-mobile-blog-carousel.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
-/* ==================== MOBILE BLOG CAROUSEL (Tablet & Mobile Only) ==================== */
-@media (max-width: 991px) {
-  .mobile-blog-carousel-wrapper {
-    position: relative;
+/* ==================== MOBILE BLOG CAROUSEL  ==================== */
+/* ==================== CAROUSEL WRAPPER ==================== */
+.blog-carousel-wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-carousel-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-carousel-slide {
+  flex: 0 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Mobile: 1 card */
+@media (max-width: 767px) {
+  .blog-carousel-slide {
     width: 100%;
-    overflow: hidden;
-    padding: 0 42px 2.5rem;
-    margin: 0 auto;
-  }
-
-  .mobile-blog-carousel-track {
-    display: flex;
-    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: grab;
-    user-select: none;
-  }
-
-  .mobile-blog-carousel-track.dragging {
-    cursor: grabbing;
-  }
-
-  .mobile-blog-slide {
-    min-width: 100%;
-    max-width: 100%;
-    flex-shrink: 0;
-    padding: 0 0.25rem;
-    box-sizing: border-box;
-  }
-
-  /* Navigation Buttons */
-  .mobile-blog-carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
-    border: none;
-    border-radius: var(--radius-full);
-    color: var(--text-dark);
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: var(--shadow-brand);
-    transition: var(--transition-base);
-  }
-
-  .mobile-blog-carousel-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, var(--brand-primary-dark) 0%, var(--brand-secondary) 100%);
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.5);
-  }
-
-  .mobile-blog-carousel-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  .mobile-blog-carousel-prev {
-    left: 2px;
-  }
-
-  .mobile-blog-carousel-next {
-    right: 2px;
-  }
-
-  /* Dots Navigation */
-  .mobile-blog-carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.4rem;
-    margin-top: 1rem;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .mobile-blog-carousel-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: var(--radius-full);
-    background: #ddd;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition-base);
-    padding: 0;
-  }
-
-  .mobile-blog-carousel-dot:hover {
-    background: #bbb;
-    transform: scale(1.2);
-  }
-
-  .mobile-blog-carousel-dot.active {
-    background: var(--brand-primary);
-    width: 20px;
-    border-radius: 4px;
-  }
-
-  .mobile-blog-slide .blog-card {
-    margin-bottom: 0;
   }
 }
 
-/* Tablet Carousel Enhancement */
+/* Tablet: 2 cards */
 @media (min-width: 768px) and (max-width: 991px) {
-  .mobile-blog-carousel-wrapper {
-    padding: 0 60px 3.5rem;
+  .blog-carousel-slide {
+    width: 50%;
+  }
+}
+
+/* PC: 3 cards */
+@media (min-width: 992px) {
+  .blog-carousel-slide {
+    width: 33.333333%;
+  }
+}
+
+/* ==================== NAVIGATION BUTTONS - MỜ & OVERLAY ==================== */
+.blog-carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  background: #808080;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: var(--transition-base);
+  opacity: 0.6;
+}
+
+.blog-carousel-nav-btn:hover {
+  background: rgba(255, 193, 7, 0.8);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 5px 20px rgba(255, 193, 7, 0.4);
+  opacity: 1;
+  color: var(--text-dark);
+}
+
+.blog-carousel-nav-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.blog-carousel-prev {
+  left: 10px;
+}
+
+.blog-carousel-next {
+  right: 10px;
+}
+
+@media (max-width: 767px) {
+  .blog-carousel-prev {
+    left: 5px;
+  }
+  .blog-carousel-next {
+    right: 5px;
+  }
+  .blog-carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    opacity: 0.5;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .blog-carousel-prev {
+    left: 8px;
+  }
+  .blog-carousel-next {
+    right: 8px;
+  }
+}
+
+/* ==================== HIDE ORIGINAL GRID ON CAROUSEL MODE ==================== */
+@media (max-width: 991px) {
+  #featured-blogs-section .row.g-4:not(.blog-carousel-track) {
+    display: none;
+  }
+}
+/* ==================== DESKTOP: ẨN CAROUSEL, HIỆN GRID ==================== */
+@media (min-width: 992px) {
+  .blog-carousel-wrapper {
+    display: none !important;
   }
 
-  .mobile-blog-carousel-btn {
-    width: 45px;
-    height: 45px;
-    font-size: 1.3rem;
+  #featured-blogs-section .row.g-4 {
+    display: flex !important;
+  }
+}
+
+/* ==================== MOBILE/TABLET: HIỆN CAROUSEL, ẨN GRID ==================== */
+@media (max-width: 991px) {
+  .blog-carousel-wrapper {
+    display: block;
   }
 
-  .mobile-blog-carousel-prev {
-    left: 10px;
-  }
-
-  .mobile-blog-carousel-next {
-    right: 10px;
-  }
-
-  .mobile-blog-carousel-dot {
-    width: 10px;
-    height: 10px;
-  }
-
-  .mobile-blog-carousel-dot.active {
-    width: 28px;
+  #featured-blogs-section .row.g-4:not(.blog-carousel-track) {
+    display: none !important;
   }
 }
 

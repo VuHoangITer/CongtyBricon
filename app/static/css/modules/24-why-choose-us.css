@@ -1,7 +1,7 @@
 /* ==================== WHY CHOOSE US SECTION ====================
  * File: 24-why-choose-us.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== WHY CHOOSE US SECTION ==================== */
@@ -26,7 +26,11 @@
   left: -10px;
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary) 0%,
+    var(--brand-primary-dark) 100%
+  );
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   opacity: 0.15;
   z-index: 0;
@@ -39,7 +43,11 @@
   right: -10px;
   width: 60px;
   height: 60px;
-  background-image: radial-gradient(circle, var(--brand-primary) 2px, transparent 2px);
+  background-image: radial-gradient(
+    circle,
+    var(--brand-primary) 2px,
+    transparent 2px
+  );
   background-size: 12px 12px;
   opacity: 0.3;
   z-index: 0;
@@ -75,7 +83,11 @@
   position: absolute;
   top: -10px;
   left: 16px;
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary) 0%,
+    var(--brand-primary-dark) 100%
+  );
   color: var(--text-dark);
   padding: 6px 14px;
   border-radius: 20px;
@@ -161,7 +173,12 @@
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  background: linear-gradient(135deg, var(--bg-yellow-light) 0%, #ffe69c 15%, var(--bg-white) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bg-yellow-light) 0%,
+    #ffe69c 15%,
+    var(--bg-white) 100%
+  );
   padding: 0.875rem;
   border-radius: var(--radius-md);
   border-left: 4px solid var(--brand-secondary);
@@ -179,7 +196,11 @@
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-secondary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-secondary) 0%,
+    var(--brand-secondary-dark) 100%
+  );
   color: white;
   border-radius: var(--radius-full);
   display: flex;

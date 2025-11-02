@@ -1,15 +1,14 @@
 /* ==================== FOOTER STYLES ====================
  * File: 18-footer.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== FOOTER ==================== */
 footer {
   /*background: linear-gradient(135deg, #1a1d20 0%, var(--text-dark) 100%);*/
-  background-image:
-  linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), /* Overlay tối để text dễ đọc */
-  url('../img/van-chuyen.webp'); /* Đường dẫn đến ảnh nền */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
+    /* Overlay tối để text dễ đọc */ url("../img/van-chuyen.webp"); /* Đường dẫn đến ảnh nền */
 
   background-size: cover; /* Ảnh phủ kín toàn bộ */
   background-position: center center; /* Căn giữa */
@@ -23,13 +22,18 @@ footer {
 }
 
 footer::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-dark), var(--brand-primary));
+  background: linear-gradient(
+    90deg,
+    var(--brand-primary),
+    var(--brand-primary-dark),
+    var(--brand-primary)
+  );
 }
 
 /* Footer Widget */
@@ -132,7 +136,7 @@ footer a:not(.social-links a):not(.btn-follow-fanpage):hover {
 }
 
 .footer-links li a::before {
-  content: '›';
+  content: "›";
   position: absolute;
   left: -15px;
   color: var(--brand-primary);
@@ -233,7 +237,7 @@ footer .social-links a[aria-label*="Zalo"]:hover {
 
 .fanpage-card {
   position: relative;
-  background-image: url('../img/background-fanpage.webp');
+  background-image: url("../img/background-fanpage.webp");
   background-size: cover;
   background-position: center;
   border-radius: 10px;

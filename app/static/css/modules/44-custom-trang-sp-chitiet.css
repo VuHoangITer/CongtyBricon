@@ -1,18 +1,18 @@
 /* ==================== TRANG SẢN PHẨM CHI TIẾT ====================
  * File: 44-custom-trang-sp-chitiet.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== NAMESPACE: TRANG SẢN PHẨM CHI TIẾT VN ==================== */
 .trang-san-pham-chi-tiet-vn {
   /* ===== COLOR PALETTE ===== */
-  --primary-color: #FFC107;
-  --primary-light: #FFF8E1;
-  --text-dark: #2C3E50;
-  --text-muted: #6C757D;
-  --bg-light: #F8F9FA;
-  --border-color: #E9ECEF;
+  --primary-color: #ffc107;
+  --primary-light: #fff8e1;
+  --text-dark: #2c3e50;
+  --text-muted: #6c757d;
+  --bg-light: #f8f9fa;
+  --border-color: #e9ecef;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -88,25 +88,25 @@
 }
 
 .trang-san-pham-chi-tiet-vn .badge.bg-info {
-  background-color: #E3F2FD !important;
-  color: #1976D2;
+  background-color: #e3f2fd !important;
+  color: #1976d2;
 }
 
 .trang-san-pham-chi-tiet-vn .badge.bg-warning {
   background-color: var(--primary-light) !important;
-  color: #F57C00;
+  color: #f57c00;
 }
 
 /* ===== PRICE SECTION ===== */
 .trang-san-pham-chi-tiet-vn .product-price-detail {
   background: var(--primary-light);
-  border: 1px solid #FFE082;
+  border: 1px solid #ffe082;
   border-radius: 10px;
   padding: 1.5rem !important;
 }
 
 .trang-san-pham-chi-tiet-vn .product-price-detail h2 {
-  color: #F57C00;
+  color: #f57c00;
   font-weight: 700;
   margin: 0;
 }
@@ -116,8 +116,8 @@
 }
 
 .trang-san-pham-chi-tiet-vn .product-price-detail .badge.bg-danger {
-  background-color: #FFEBEE !important;
-  color: #C62828;
+  background-color: #ffebee !important;
+  color: #c62828;
   font-weight: 600;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .trang-san-pham-chi-tiet-vn .btn-outline-primary {
-  border: 2px solid #2196F3;
+  border: 2px solid #2196f3;
 }
 
 .trang-san-pham-chi-tiet-vn .btn-outline-secondary {
@@ -225,7 +225,7 @@
 }
 
 .trang-san-pham-chi-tiet-vn .table tbody tr:nth-child(even) {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .trang-san-pham-chi-tiet-vn .table .bg-light {
@@ -245,7 +245,7 @@
 }
 
 .trang-san-pham-chi-tiet-vn .card.border-warning {
-  border-color: #FFE082 !important;
+  border-color: #ffe082 !important;
   background-color: var(--primary-light) !important;
 }
 
@@ -258,8 +258,8 @@
 }
 
 .trang-san-pham-chi-tiet-vn .badge.bg-success {
-  background-color: #E8F5E9 !important;
-  color: #2E7D32 !important;
+  background-color: #e8f5e9 !important;
+  color: #2e7d32 !important;
   font-weight: 600;
 }
 

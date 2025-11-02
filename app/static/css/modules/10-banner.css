@@ -1,7 +1,7 @@
 /* ==================== BANNER CAROUSEL STYLES ====================
  * File: 10-banner.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== BANNER CAROUSEL ==================== */
@@ -64,9 +64,7 @@
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
-  text-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.8),
-    0 0 20px rgba(255, 215, 0, 0.5);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
   letter-spacing: -0.5px;
 }
 
@@ -76,9 +74,7 @@
   color: var(--bg-white);
   line-height: 1.6;
   margin-bottom: 2rem;
-  text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.7),
-    0 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.5);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -165,7 +161,7 @@
 
 /* ==================== SKELETON LOADING ==================== */
 .carousel-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;

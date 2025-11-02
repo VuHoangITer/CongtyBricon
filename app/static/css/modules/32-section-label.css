@@ -1,40 +1,39 @@
 /* ==================== SECTION LABEL & TIMELINE FIXES ====================
  * File: 32-section-label.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== END OF OPTIMIZED CSS ==================== */
-timeline {
-    gap: 1.25rem 0.75rem;
-  }
+.timeline {
+  gap: 1.25rem 0.75rem;
+}
 
-  .process-step {
-    padding: 1.5rem 0.625rem 1rem;
-  }
+.process-step {
+  padding: 1.5rem 0.625rem 1rem;
+}
 
-  .process-number {
-    width: 38px;
-    height: 38px;
-    font-size: 0.95rem;
-  }
+.process-number {
+  width: 38px;
+  height: 38px;
+  font-size: 0.95rem;
+}
 
-  .process-icon {
-    width: 65px;
-    height: 65px;
-  }
+.process-icon {
+  width: 65px;
+  height: 65px;
+}
 
-  .process-icon i {
-    font-size: 1.6rem;
-  }
+.process-icon i {
+  font-size: 1.6rem;
+}
 
-  .process-title {
-    font-size: 0.825rem;
-  }
+.process-title {
+  font-size: 0.825rem;
+}
 
-  .process-description {
-    font-size: 0.7rem;
-  }
+.process-description {
+  font-size: 0.7rem;
 }
 
 @media (min-width: 768px) {
@@ -91,10 +90,6 @@ timeline {
     padding: 2.5rem 1.5rem 2rem;
     border-radius: var(--radius-lg);
   }
-
-  .process-(--brand-primary), #ffb300);
-  border-radius: 2px;
-  margin: 0 auto;
 }
 
 .section-label {
@@ -113,7 +108,7 @@ timeline {
 }
 
 .section-label span::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;

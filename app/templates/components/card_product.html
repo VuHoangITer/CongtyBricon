@@ -4,13 +4,16 @@
     <div class="product-image position-relative">
       {% set media_info = product.get_media_seo_info() if product.image else None %}
 
-      <img
-        src="{{ product.image if product.image else 'https://via.placeholder.com/300x300/FFC107/FFFFFF?text=Product' }}"
-        class="card-img-top"
-        alt="{{ media_info.alt_text if media_info and media_info.alt_text else product.name }}"
-        title="{{ media_info.title if media_info and media_info.title else product.name }}"
-        loading="lazy"
-      />
+      <!-- Link bọc ảnh -->
+      <a href="{{ url_for('main.product_detail', slug=product.slug) }}" class="d-block h-100" style="position: relative; z-index: 1;">
+        <img
+          src="{{ product.image if product.image else 'https://via.placeholder.com/300x300/FFC107/FFFFFF?text=Product' }}"
+          class="card-img-top"
+          alt="{{ media_info.alt_text if media_info and media_info.alt_text else product.name }}"
+          title="{{ media_info.title if media_info and media_info.title else product.name }}"
+          loading="lazy"
+        />
+      </a>
 
       <!-- Caption ẩn cho SEO -->
       {% if media_info and media_info.caption %}
@@ -21,6 +24,7 @@
       {% if product.old_price and product.price > 0 %}
       <span
         class="badge bg-danger position-absolute top-0 start-0 m-2 px-2 py-1 fs-6 shadow-sm"
+        style="z-index: 2; pointer-events: none;"
       >
         {{ ((product.old_price - product.price) / product.old_price * 100)|int }}%
       </span>

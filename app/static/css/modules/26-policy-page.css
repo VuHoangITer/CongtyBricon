@@ -1,7 +1,7 @@
 /* ==================== RETURN & REFUND POLICY STYLES ====================
  * File: 26-policy-page.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== RETURN & REFUND POLICY STYLES ==================== */
@@ -61,7 +61,11 @@
 }
 
 .chinh-sach-vn .card-header {
-  background: linear-gradient(135deg, var(--policy-primary) 0%, #ffb300 100%) !important;
+  background: linear-gradient(
+    135deg,
+    var(--policy-primary) 0%,
+    #ffb300 100%
+  ) !important;
   padding: 1.5rem;
   border-bottom: none;
 }

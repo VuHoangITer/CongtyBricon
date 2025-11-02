@@ -1,7 +1,7 @@
 /* ==================== FEATURED PROJECTS CAROUSEL ====================
  * File: 21-featured-projects.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== FEATURED PROJECTS CAROUSEL ==================== */
@@ -87,7 +87,11 @@
   left: 0;
   right: 0;
   height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0) 60%
+  );
   opacity: 0;
   transition: var(--transition-slow);
 }
@@ -154,7 +158,7 @@
   font-size: 0.65rem;
   font-weight: 600;
   align-self: flex-start;
-  background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+  background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
   border: none;
   border-radius: 20px; /* ✅ Bo tròn đẹp */
   color: #1a1a1a;
@@ -166,7 +170,7 @@
 #featured-projects .project-info .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
-  background: linear-gradient(135deg, #FFD54F 0%, #FFC107 100%);
+  background: linear-gradient(135deg, #ffd54f 0%, #ffc107 100%);
 }
 
 #featured-projects .project-info .btn i {

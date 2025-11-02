@@ -1,7 +1,7 @@
 /* ==================== PAGE LOADER ====================
  * File: 28-page-loader.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== PAGE LOADER ==================== */
@@ -52,11 +52,21 @@
   animation: slideRightToLeft 1.5s infinite ease-in-out;
 }
 
-.loader-dots span:nth-child(1) { animation-delay: 0s; }
-.loader-dots span:nth-child(2) { animation-delay: 0.15s; }
-.loader-dots span:nth-child(3) { animation-delay: 0.3s; }
-.loader-dots span:nth-child(4) { animation-delay: 0.45s; }
-.loader-dots span:nth-child(5) { animation-delay: 0.6s; }
+.loader-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+.loader-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.loader-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.loader-dots span:nth-child(4) {
+  animation-delay: 0.45s;
+}
+.loader-dots span:nth-child(5) {
+  animation-delay: 0.6s;
+}
 
 @keyframes slideRightToLeft {
   0% {
@@ -73,7 +83,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 

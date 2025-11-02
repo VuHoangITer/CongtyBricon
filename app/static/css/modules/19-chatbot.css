@@ -1,7 +1,7 @@
 /* ==================== CHATBOT WIDGET ====================
  * File: 19-chatbot.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== CHATBOT WIDGET ==================== */
@@ -42,7 +42,11 @@
   left: 30px;
   width: var(--chatbot-button-size);
   height: var(--chatbot-button-size);
-  background: linear-gradient(135deg, var(--chatbot-primary) 0%, var(--chatbot-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--chatbot-primary) 0%,
+    var(--chatbot-primary-dark) 100%
+  );
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
@@ -94,8 +98,13 @@
 }
 
 @keyframes pulse-badge {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 /* Chatbot Widget */
@@ -133,7 +142,11 @@
 
 /* Header */
 .chatbot-header {
-  background: linear-gradient(135deg, var(--chatbot-primary) 0%, var(--chatbot-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--chatbot-primary) 0%,
+    var(--chatbot-primary-dark) 100%
+  );
   color: var(--chatbot-text-dark);
   padding: var(--chatbot-spacing-md) 12px;
   display: flex;
@@ -184,8 +197,13 @@
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .chatbot-close-btn {
@@ -277,7 +295,11 @@
 }
 
 .chatbot-message.user .chatbot-message-content {
-  background: linear-gradient(135deg, var(--chatbot-primary) 0%, var(--chatbot-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--chatbot-primary) 0%,
+    var(--chatbot-primary-dark) 100%
+  );
   color: var(--chatbot-text-dark);
   border-bottom-right-radius: var(--chatbot-border-radius-xs);
   font-weight: 500;
@@ -311,8 +333,14 @@
 }
 
 @keyframes typing {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-6px); }
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+  }
 }
 
 /* Input Area */
@@ -341,7 +369,11 @@
 .chatbot-input button {
   width: 35px;
   height: 35px;
-  background: linear-gradient(135deg, var(--chatbot-primary) 0%, var(--chatbot-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--chatbot-primary) 0%,
+    var(--chatbot-primary-dark) 100%
+  );
   border: none;
   border-radius: var(--radius-full);
   color: white;

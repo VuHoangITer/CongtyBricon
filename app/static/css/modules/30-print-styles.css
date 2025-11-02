@@ -1,7 +1,7 @@
 /* ==================== PRINT STYLES ====================
  * File: 30-print-styles.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== PRINT STYLES ==================== */
@@ -35,9 +35,15 @@
     line-height: 1.5;
   }
 
-  h1 { font-size: 24pt; }
-  h2 { font-size: 18pt; }
-  h3 { font-size: 14pt; }
+  h1 {
+    font-size: 24pt;
+  }
+  h2 {
+    font-size: 18pt;
+  }
+  h3 {
+    font-size: 14pt;
+  }
 
   a {
     text-decoration: underline;

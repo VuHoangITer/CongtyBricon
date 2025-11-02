@@ -78,11 +78,11 @@ CSS_MODULES = {
     },
     '12-sections.css': {
         'start': '/* ==================== SECTIONS ==================== */',
-        'end': '/* ==================== MOBILE BLOG CAROUSEL (Tablet & Mobile Only) ==================== */',
+        'end': '/* ==================== MOBILE BLOG CAROUSEL  ==================== */',
         'description': 'Section Styles'
     },
     '13-mobile-blog-carousel.css': {
-        'start': '/* ==================== MOBILE BLOG CAROUSEL (Tablet & Mobile Only) ==================== */',
+        'start': '/* ==================== MOBILE BLOG CAROUSEL  ==================== */',
         'end': '/* ==================== PAGINATION ==================== */',
         'description': 'Mobile Blog Carousel'
     },

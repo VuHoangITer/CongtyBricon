@@ -1,7 +1,7 @@
 /* ==================== ABOUT COMPANY SECTION ====================
  * File: 23-about-company.css
  * Auto-generated from style.css
- * Date: 2025-10-30 12:33:42
+ * Date: 2025-11-02 21:02:18
  * ========================================================================== */
 
 /* ==================== ABOUT COMPANY SECTION ==================== */
@@ -20,7 +20,11 @@
   left: -10px;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary) 0%,
+    var(--brand-primary-dark) 100%
+  );
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   opacity: 0.15;
   z-index: 0;
@@ -28,7 +32,8 @@
 }
 
 @keyframes blob-morph {
-  0%, 100% {
+  0%,
+  100% {
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   }
   50% {
@@ -42,7 +47,11 @@
   right: -10px;
   width: 50px;
   height: 50px;
-  background-image: radial-gradient(circle, var(--brand-primary) 2px, transparent 2px);
+  background-image: radial-gradient(
+    circle,
+    var(--brand-primary) 2px,
+    transparent 2px
+  );
   background-size: 12px 12px;
   opacity: 0.3;
   z-index: 0;
@@ -70,7 +79,11 @@
   position: absolute;
   top: -10px;
   left: 16px;
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary) 0%,
+    var(--brand-primary-dark) 100%
+  );
   color: var(--text-dark);
   padding: 5px 12px;
   border-radius: 20px;
@@ -90,8 +103,13 @@
 }
 
 @keyframes play-icon-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .video-corner-tl,
