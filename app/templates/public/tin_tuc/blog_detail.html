@@ -27,7 +27,9 @@ blog.content[:160]|striptags }}{% endblock %}
 />
 {% endif %} {% if blog.author %}
 <meta property="article:author" content="{{ blog.author }}" />
-{% endif %} {% endblock %} {% block content %}
+{% endif %}
+<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
+{% endblock %} {% block content %}
 <!-- ==================== BREADCRUMB & PAGE HEADER ==================== -->
 <div class="page-header bg-light py-4">
   <div class="container">
