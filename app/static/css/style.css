@@ -1282,11 +1282,11 @@ section h2 {
 /* ==================== DESKTOP: ẨN CAROUSEL, HIỆN GRID ==================== */
 @media (min-width: 992px) {
   .blog-carousel-wrapper {
-    display: none !important;
+    display: none;
   }
 
   #featured-blogs-section .row.g-4 {
-    display: flex !important;
+    display: flex;
   }
 }
 
@@ -1297,7 +1297,7 @@ section h2 {
   }
 
   #featured-blogs-section .row.g-4:not(.blog-carousel-track) {
-    display: none !important;
+    display: none;
   }
 }
 

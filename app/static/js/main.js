@@ -1258,7 +1258,8 @@ window.addEventListener('beforeunload', function() {
   // ==================== STATE ==================== //
   BC.state = {
     carouselInstance: null,
-    isInitialized: false
+    isInitialized: false,
+    originalGridDisplay: ''
   };
 
   // ==================== CONFIG ==================== //
@@ -1273,11 +1274,39 @@ window.addEventListener('beforeunload', function() {
     return window.innerWidth <= this.config.breakpoint;
   };
 
+  // ==================== RESTORE GRID IF NEEDED ==================== //
+  BC.ensureGridVisible = function() {
+    const blogSection = document.querySelector('#featured-blogs-section');
+    if (!blogSection) return;
+
+    const originalGrid = blogSection.querySelector('.row.g-4');
+    const wrapper = blogSection.querySelector('.blog-carousel-wrapper');
+
+    if (!this.shouldActivate()) {
+      // Desktop mode: Đảm bảo grid hiện, carousel ẩn
+      if (wrapper) {
+        wrapper.style.display = 'none';
+      }
+      if (originalGrid) {
+        originalGrid.style.display = '';
+      }
+    } else {
+      // Mobile mode: Đảm bảo carousel hiện, grid ẩn
+      if (wrapper) {
+        wrapper.style.display = 'block';
+      }
+      if (originalGrid) {
+        originalGrid.style.display = 'none';
+      }
+    }
+  };
+
   // ==================== KHỞI TẠO CAROUSEL ==================== //
-  BC.init = function() {
+  BC.init = function(forceReinit = false) {
     // Kiểm tra breakpoint
     if (!this.shouldActivate()) {
       console.log('📱 Blog Carousel: Skipped (Desktop mode - using grid)');
+      this.ensureGridVisible();
       return;
     }
 
@@ -1293,6 +1322,11 @@ window.addEventListener('beforeunload', function() {
       return;
     }
 
+    // Lưu display ban đầu của grid
+    if (!this.state.originalGridDisplay) {
+      this.state.originalGridDisplay = originalGrid.style.display || '';
+    }
+
     const blogCards = originalGrid.querySelectorAll('.col-lg-4');
     if (blogCards.length === 0) {
       console.log('📱 Blog Carousel: No blog cards found');
@@ -1300,9 +1334,17 @@ window.addEventListener('beforeunload', function() {
     }
 
     // Kiểm tra xem đã có carousel chưa
-    if (blogSection.querySelector('.blog-carousel-wrapper')) {
-      console.log('📱 Blog Carousel: Already exists');
+    const existingWrapper = blogSection.querySelector('.blog-carousel-wrapper');
+    if (existingWrapper && !forceReinit) {
+      console.log('📱 Blog Carousel: Already exists, ensuring visibility');
+      existingWrapper.style.display = 'block';
+      originalGrid.style.display = 'none';
       return;
+    }
+
+    // Nếu force reinit, xóa wrapper cũ
+    if (existingWrapper && forceReinit) {
+      existingWrapper.remove();
     }
 
     // Tạo carousel structure
@@ -1316,6 +1358,7 @@ window.addEventListener('beforeunload', function() {
     // Tạo wrapper
     const wrapper = document.createElement('div');
     wrapper.className = 'blog-carousel-wrapper';
+    wrapper.style.display = 'block'; // Force display
 
     const container = document.createElement('div');
     container.className = 'blog-carousel-container';
@@ -1431,11 +1474,11 @@ window.addEventListener('beforeunload', function() {
     const originalGrid = blogSection.querySelector('.row.g-4');
 
     if (wrapper) {
-      wrapper.remove();
+      wrapper.style.display = 'none'; // Ẩn thay vì xóa
     }
 
     if (originalGrid) {
-      originalGrid.style.display = '';
+      originalGrid.style.display = this.state.originalGridDisplay || '';
     }
 
     this.state.carouselInstance = null;
@@ -1457,14 +1500,47 @@ window.addEventListener('beforeunload', function() {
       this.state.carouselInstance.updateItemsPerView();
       this.state.carouselInstance.updateCarousel();
     }
+
+    // Đảm bảo visibility đúng
+    this.ensureGridVisible();
   };
 
   // ==================== AUTO INIT ==================== //
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => BC.init());
-  } else {
+  function initializeCarousel() {
     BC.init();
   }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeCarousel);
+  } else {
+    initializeCarousel();
+  }
+
+  // ==================== FIX: KHỞI TẠO LẠI KHI QUAY LẠI TRANG ==================== //
+  window.addEventListener('pageshow', function(event) {
+    console.log('📱 Blog Carousel: pageshow event', {
+      persisted: event.persisted,
+      isInitialized: BC.state.isInitialized
+    });
+
+    // Reset state và khởi tạo lại
+    BC.state.isInitialized = false;
+    BC.state.carouselInstance = null;
+
+    // Đợi một chút để DOM ổn định
+    setTimeout(function() {
+      initializeCarousel();
+      BC.ensureGridVisible();
+    }, 50);
+  });
+
+  // ==================== VISIBILITY CHANGE ==================== //
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+      console.log('📱 Blog Carousel: Page visible again');
+      BC.ensureGridVisible();
+    }
+  });
 
   // ==================== HANDLE RESIZE WITH DEBOUNCE ==================== //
   let resizeTimeout;
@@ -1473,10 +1549,7 @@ window.addEventListener('beforeunload', function() {
     resizeTimeout = setTimeout(() => BC.handleResize(), 250);
   });
 
-  // ==================== CLEANUP ==================== //
-  window.addEventListener('beforeunload', () => BC.destroy());
-
-  console.log('📦 Blog Carousel: Module loaded with namespace');
+  console.log('📦 Blog Carousel: Module loaded with full recovery support');
 
 })();
 
