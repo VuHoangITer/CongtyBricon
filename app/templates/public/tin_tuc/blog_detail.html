@@ -27,9 +27,7 @@ blog.content[:160]|striptags }}{% endblock %}
 />
 {% endif %} {% if blog.author %}
 <meta property="article:author" content="{{ blog.author }}" />
-{% endif %}
-<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
-{% endblock %} {% block content %}
+{% endif %} {% endblock %} {% block content %}
 <!-- ==================== BREADCRUMB & PAGE HEADER ==================== -->
 <div class="page-header bg-light py-4">
   <div class="container">
@@ -67,10 +65,6 @@ blog.content[:160]|striptags }}{% endblock %}
               >
                 <i class="bi bi-calendar text-warning"></i>
                 {{ blog.created_at|vn_date }}
-              </span>
-              <span>
-                <i class="bi bi-eye text-warning"></i>
-                {{ blog.views }} lượt xem
               </span>
               {% if blog.author %}
               <span

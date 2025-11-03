@@ -38,9 +38,6 @@
           <i class="bi bi-calendar3 text-warning"></i>
           {{ blog.created_at|vn_date }}
         </span>
-        <span class="me-3">
-          <i class="bi bi-eye text-warning"></i> {{ blog.views }}
-        </span>
         {% if blog.author %}
         <span class="me-3" itemprop="author" itemscope itemtype="https://schema.org/Person">
           <i class="bi bi-person text-warning"></i>

@@ -3322,7 +3322,7 @@ footer .row:last-child {
     content: "→";
     position: absolute;
     top: 80px;
-    right: -2.5rem;
+    right: -1.5rem;
     font-size: 2rem;
     color: var(--brand-primary);
     font-weight: bold;
