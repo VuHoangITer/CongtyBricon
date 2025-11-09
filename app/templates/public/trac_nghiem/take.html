@@ -1,573 +1,914 @@
-{% extends 'layouts/clone.html' %}
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ quiz.title }} - Làm bài</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
 
-{% block title %}{{ quiz.title }} - Làm bài{% endblock %}
+    <style>
+      /* ==================== NAMESPACE: dethi-vn ==================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-{% block extra_css %}
-<style>
-/* ==================== QUIZ CONTAINER ==================== */
-.quiz-container {
-    max-width: 1400px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: #f5f5f5;
+        color: #333;
+      }
 
-/* ==================== HEADER ==================== */
-.quiz-header {
-    background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
-    color: #000;
-    padding: 1.5rem;
-    border-radius: 12px 12px 0 0;
-    font-weight: 700;
-    font-size: 1.25rem;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+      .dethi-vn {
+        min-height: 100vh;
+      }
 
-/* ==================== LAYOUT 2 COLUMNS ==================== */
-.quiz-layout {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
+      /* ==================== HEADER ==================== */
+      .dethi-vn__header {
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
+        padding: 12px 16px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
 
-/* ==================== QUESTION AREA ==================== */
-.question-container {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    padding: 2rem;
-}
+      .dethi-vn__header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
 
-.question-header {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #f0f0f0;
-}
+      .dethi-vn__title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1a1a1a;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-.question-text {
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: #222;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
+      .dethi-vn__timer {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: "Courier New", monospace;
+        color: #2563eb;
+        white-space: nowrap;
+      }
 
-/* ==================== ANSWERS ==================== */
-.answer-option {
-    background: #f8f9fa;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
+      .dethi-vn__timer.warning {
+        color: #f59e0b;
+      }
 
-.answer-option:hover {
-    background: #fff;
-    border-color: #FFC107;
-    transform: translateX(5px);
-}
+      .dethi-vn__timer.danger {
+        color: #ef4444;
+        animation: dethi-vn-pulse 1s infinite;
+      }
 
-.answer-option.selected {
-    background: #FFF8E1;
-    border-color: #FFC107;
-    font-weight: 600;
-}
+      @keyframes dethi-vn-pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
 
-.answer-option input[type="radio"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
+      /* ==================== MAIN LAYOUT ==================== */
+      .dethi-vn__layout {
+        display: flex;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
 
-.answer-label {
-    font-size: 1rem;
-    color: #333;
-    margin: 0;
-    flex: 1;
-    cursor: pointer;
-}
+      .dethi-vn__main {
+        flex: 8;
+        padding: 16px;
+      }
 
-/* ==================== SIDEBAR ==================== */
-.quiz-sidebar {
-    position: sticky;
-    top: 20px;
-    height: fit-content;
-}
+      /* ==================== QUESTION CARD ==================== */
+      .dethi-vn__card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
 
-.sidebar-card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-}
+      .dethi-vn__question-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f0f0f0;
+      }
 
-.sidebar-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #666;
-    margin-bottom: 0.75rem;
-    text-align: center;
-}
+      .dethi-vn__question-num {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2563eb;
+      }
 
-.info-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    display: block;
-}
+      .dethi-vn__question-info {
+        font-size: 13px;
+        color: #666;
+      }
 
-/* Timer */
-.timer-display {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    color: #28a745;
-    font-family: 'Courier New', monospace;
-}
+      .dethi-vn__question-text {
+        font-size: 16px;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
 
-.timer-display.warning {
-    color: #ffc107;
-    animation: pulse 1s infinite;
-}
+      /* ==================== ANSWERS ==================== */
+      .dethi-vn__answers {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
 
-.timer-display.danger {
-    color: #dc3545;
-    animation: pulse 0.5s infinite;
-}
+      .dethi-vn__answer {
+        border: 1.5px solid #e5e5e5;
+        border-radius: 6px;
+        padding: 14px 16px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: #fff;
+      }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-}
+      .dethi-vn__answer:hover {
+        border-color: #2563eb;
+        background: #f8faff;
+      }
 
-/* Question Grid */
-.question-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.5rem;
-}
+      .dethi-vn__answer.selected {
+        border-color: #2563eb;
+        background: #eff6ff;
+      }
 
-.question-number {
-    aspect-ratio: 1;
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: #fff;
-}
+      .dethi-vn__answer-radio {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        margin-top: 2px;
+        cursor: pointer;
+        accent-color: #2563eb;
+      }
 
-.question-number:hover {
-    border-color: #FFC107;
-    transform: scale(1.05);
-}
+      .dethi-vn__answer-label {
+        font-size: 15px;
+        color: #333;
+        cursor: pointer;
+        flex: 1;
+      }
 
-.question-number.answered {
-    background: #28a745;
-    color: #fff;
-    border-color: #28a745;
-}
+      /* ==================== NAVIGATION ==================== */
+      .dethi-vn__nav {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+      }
 
-.question-number.current {
-    background: #FFC107;
-    color: #000;
-    border-color: #FFC107;
-    font-weight: 700;
-}
+      .dethi-vn__btn {
+        flex: 1;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
 
-/* Legend */
-.quiz-legend {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-    font-size: 0.875rem;
-}
+      .dethi-vn__btn--prev {
+        background: #fff;
+        color: #666;
+        border: 1.5px solid #e5e5e5;
+      }
 
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+      .dethi-vn__btn--prev:hover {
+        border-color: #2563eb;
+        color: #2563eb;
+      }
 
-.legend-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-}
+      .dethi-vn__btn--next {
+        background: #2563eb;
+        color: #fff;
+      }
 
-.legend-dot.answered { background: #28a745; }
-.legend-dot.unanswered { background: #fff; border: 2px solid #e0e0e0; }
+      .dethi-vn__btn--next:hover {
+        background: #1d4ed8;
+      }
 
-/* Submit Button */
-.submit-quiz-btn {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    border: none;
-    color: #fff;
-    font-weight: 700;
-    padding: 1rem;
-    border-radius: 8px;
-    width: 100%;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-}
+      .dethi-vn__btn--submit {
+        background: #10b981;
+        color: #fff;
+      }
 
-.submit-quiz-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-}
+      .dethi-vn__btn--submit:hover {
+        background: #059669;
+      }
 
-/* ==================== NAVIGATION BUTTONS ==================== */
-.question-navigation {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid #f0f0f0;
-}
+      /* ==================== SIDEBAR (Desktop) ==================== */
+      .dethi-vn__sidebar {
+        flex: 4;
+        background: #fff;
+        border-left: 1px solid #e5e5e5;
+        padding: 16px;
+        position: sticky;
+        top: 57px;
+        height: calc(100vh - 57px);
+        overflow-y: auto;
+        display: none;
+      }
 
-.nav-btn {
-    flex: 1;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-}
+      .dethi-vn__sidebar-section {
+        margin-bottom: 16px;
+      }
 
-/* ==================== RESPONSIVE ==================== */
-@media (max-width: 991px) {
-    .quiz-layout {
-        grid-template-columns: 1fr;
-    }
-    
-    .quiz-sidebar {
-        position: static;
-        order: -1;
-    }
-    
-    .question-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
-}
+      .dethi-vn__sidebar-title {
+        font-size: 7px;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 8px;
+      }
 
-@media (max-width: 576px) {
-    .quiz-header {
-        font-size: 1rem;
-        padding: 1rem;
-    }
-    
-    .question-container {
-        padding: 1.5rem;
-    }
-    
-    .question-text {
-        font-size: 1rem;
-    }
-    
-    .question-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .timer-display {
-        font-size: 2rem;
-    }
-}
-/* ==================== ẨN CHATBOT VÀ FLOATING BUTTONS ==================== */
-.chatbot-widget,
-.floating-buttons,
-.scroll-to-top {
-    display: none !important;
-}
-</style>
-{% endblock %}
+      .dethi-vn__stat {
+        text-align: center;
+        padding: 8px;
+        background: #f8f9fa;
+        border-radius: 6px;
+      }
 
-{% block content %}
-<div class="quiz-container">
-    <!-- Main Layout -->
-    <div class="quiz-layout">
-        <!-- Questions Area -->
-        <div class="question-container">
-            <div id="questions-wrapper">
-                {% for question in questions %}
-                <div class="question-block {% if loop.first %}active{% else %}d-none{% endif %}" 
-                     data-question-id="{{ question.id }}"
-                     data-question-index="{{ loop.index }}">
-                    
-                    <div class="question-text">
-                        Câu {{ loop.index }}: {{ question.question_text }}
-                    </div>
+      .dethi-vn__stat-value {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
 
-                    <div class="answers-wrapper">
-                        {% for answer in question.shuffled_answers %}
-                        <div class="answer-option" 
-                             data-answer-id="{{ answer.id }}"
-                             data-question-id="{{ question.id }}">
-                            <input type="radio" 
-                                   name="question_{{ question.id }}" 
-                                   id="answer_{{ answer.id }}"
-                                   value="{{ answer.id }}"
-                                   {% if question.id in answered_questions %}checked{% endif %}>
-                                <label class="answer-label" for="answer_{{ answer.id }}">
-                                    {{ 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[loop.index0] }}. {{ answer.answer_text }}
-                                </label>
+      .dethi-vn__timer-large.warning {
+        color: #f59e0b;
+        background: #fffbeb;
+      }
 
-                        </div>
-                        {% endfor %}
-                    </div>
+      .dethi-vn__timer-large.danger {
+        color: #ef4444;
+        background: #fef2f2;
+        animation: dethi-vn-pulse 1s infinite;
+      }
 
-                    <!-- Navigation Buttons -->
-                    <div class="question-navigation">
-                        {% if not loop.first %}
-                        <button class="btn btn-outline-secondary nav-btn prev-question">
-                            <i class="bi bi-arrow-left"></i> Câu trước
-                        </button>
-                        {% endif %}
+      /* ==================== QUESTION GRID ==================== */
+      .dethi-vn__grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 3px;
+      }
 
-                        {% if not loop.last %}
-                        <button class="btn btn-warning nav-btn next-question">
-                            Câu sau <i class="bi bi-arrow-right"></i>
-                        </button>
-                        {% else %}
-                        <button class="btn btn-success nav-btn" onclick="confirmSubmit()">
-                            <i class="bi bi-check-circle"></i> Hoàn thành
-                        </button>
-                        {% endif %}
-                    </div>
+      .dethi-vn__grid-item {
+        width: 30px;
+        height: 30px;
+        border: 1.5px solid #e5e5e5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        background: #fff;
+        color: #666;
+      }
+
+      .dethi-vn__grid-item:hover {
+        border-color: #2563eb;
+        transform: scale(1.05);
+      }
+
+      .dethi-vn__grid-item.answered {
+        background: #10b981;
+        color: #fff;
+        border-color: #10b981;
+      }
+
+      .dethi-vn__grid-item.current {
+        background: #2563eb;
+        color: #fff;
+        border-color: #2563eb;
+        font-weight: 600;
+      }
+
+      .dethi-vn__submit-btn {
+        width: 100%;
+        padding: 10px;
+        background: #10b981;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .dethi-vn__submit-btn:hover {
+        background: #059669;
+      }
+
+      /* ==================== MOBILE: TOP BAR ==================== */
+      .dethi-vn__topbar {
+        display: block;
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .dethi-vn__topbar:active {
+        background: #f8f9fa;
+      }
+
+      .dethi-vn__topbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dethi-vn__topbar-text {
+        font-size: 14px;
+        font-weight: 500;
+        color: #1a1a1a;
+      }
+
+      .dethi-vn__topbar-icon {
+        font-size: 18px;
+        color: #666;
+      }
+
+      /* ==================== MODAL ==================== */
+      .dethi-vn__modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 200;
+        display: none;
+      }
+
+      .dethi-vn__modal-overlay.active {
+        display: flex;
+        animation: dethi-vn-fadeIn 0.2s ease;
+      }
+
+      @keyframes dethi-vn-fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .dethi-vn__modal {
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        animation: dethi-vn-slideIn 0.3s ease;
+        padding: 0;
+      }
+
+      @keyframes dethi-vn-slideIn {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .dethi-vn__modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid #e5e5e5;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 10;
+      }
+
+      .dethi-vn__modal-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      .dethi-vn__modal-close {
+        width: 36px;
+        height: 36px;
+        border: none;
+        background: #f5f5f5;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      .dethi-vn__modal-body {
+        padding: 20px;
+      }
+
+      /* ==================== UTILITIES ==================== */
+      .d-none {
+        display: none !important;
+      }
+
+      /* ==================== RESPONSIVE ==================== */
+      @media (min-width: 1024px) {
+        .dethi-vn__sidebar {
+          display: block;
+        }
+
+        .dethi-vn__topbar {
+          display: none;
+        }
+
+        .dethi-vn__main {
+          padding: 24px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .dethi-vn__header-content {
+          padding: 0 4px;
+        }
+
+        .dethi-vn__title {
+          font-size: 14px;
+        }
+
+        .dethi-vn__timer {
+          font-size: 16px;
+        }
+
+        .dethi-vn__main {
+          padding: 12px;
+        }
+
+        .dethi-vn__card {
+          padding: 16px;
+        }
+
+        .dethi-vn__question-text {
+          font-size: 15px;
+        }
+
+        .dethi-vn__grid {
+          grid-template-columns: repeat(6, 1fr);
+        }
+      }
+
+      /* ==================== HIDE EXTERNAL WIDGETS ==================== */
+      .chatbot-widget,
+      .floating-buttons,
+      .scroll-to-top {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dethi-vn">
+      <!-- Header -->
+      <header class="dethi-vn__header">
+        <div class="dethi-vn__header-content">
+          <h1 class="dethi-vn__title">{{ quiz.title }}</h1>
+          <div class="dethi-vn__timer" id="timer-header">
+            {{ '%02d'|format(remaining_seconds // 60) }}:{{
+            '%02d'|format(remaining_seconds % 60) }}
+          </div>
+        </div>
+      </header>
+
+      <div class="dethi-vn__layout">
+        <!-- Main Content -->
+        <main class="dethi-vn__main">
+          <!-- Mobile Top Bar -->
+          <div class="dethi-vn__topbar" onclick="toggleModal()">
+            <div class="dethi-vn__topbar-content">
+              <span class="dethi-vn__topbar-text"
+                >Mục lục câu hỏi (<span id="answered-count-topbar"
+                  >{{ answered_questions|length }}</span
+                >/{{ questions|length }})</span
+              >
+              <span class="dethi-vn__topbar-icon">☰</span>
+            </div>
+          </div>
+
+          <div id="questions-wrapper">
+            {% for question in questions %}
+            <div
+              class="dethi-vn__card question-block {% if loop.first %}active{% else %}d-none{% endif %}"
+              data-question-id="{{ question.id }}"
+              data-question-index="{{ loop.index }}"
+            >
+              <div class="dethi-vn__question-header">
+                <span class="dethi-vn__question-num">Câu {{ loop.index }}</span>
+                <span class="dethi-vn__question-info">1 đáp án</span>
+              </div>
+
+              <div class="dethi-vn__question-text">
+                {{ question.question_text }}
+              </div>
+
+              <div class="dethi-vn__answers answers-wrapper">
+                {% for answer in question.shuffled_answers %}
+                <div
+                  class="dethi-vn__answer answer-option"
+                  data-answer-id="{{ answer.id }}"
+                  data-question-id="{{ question.id }}"
+                >
+                  <input
+                    type="radio"
+                    class="dethi-vn__answer-radio"
+                    name="question_{{ question.id }}"
+                    id="answer_{{ answer.id }}"
+                    value="{{ answer.id }}"
+                    {%
+                    if
+                    question.id
+                    in
+                    answered_questions
+                    %}checked{%
+                    endif
+                    %}
+                  />
+                  <label
+                    class="dethi-vn__answer-label"
+                    for="answer_{{ answer.id }}"
+                  >
+                    {{ 'ABCD'[loop.index0] if loop.index0 < 4 else loop.index0
+                    }}. {{ answer.answer_text }}
+                  </label>
                 </div>
                 {% endfor %}
-            </div>
-        </div>
+              </div>
 
-        <!-- Sidebar -->
-        <div class="quiz-sidebar">
-            <!-- Progress -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">Số câu đã làm</div>
-                <div class="info-value">
-                    <span id="answered-count">{{ answered_questions|length }}</span>/{{ questions|length }}
-                </div>
-            </div>
-
-            <!-- Timer -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">Thời gian còn lại</div>
-                <div class="timer-display" id="timer">
-                    {{ '%02d'|format(remaining_seconds // 60) }}:{{ '%02d'|format(remaining_seconds % 60) }}
-                </div>
-            </div>
-
-            <!-- Question Navigator -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">Danh sách câu hỏi</div>
-                <div class="question-grid" id="question-navigator">
-                    {% for question in questions %}
-                    <div class="question-number {% if loop.first %}current{% endif %} {% if question.id in answered_questions %}answered{% endif %}"
-                         data-question-index="{{ loop.index }}"
-                         onclick="goToQuestion({{ loop.index }})">
-                        {{ loop.index }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Legend -->
-                <div class="quiz-legend">
-                    <div class="legend-item">
-                        <div class="legend-dot answered"></div>
-                        <span>Câu đã làm</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot unanswered"></div>
-                        <span>Câu chưa làm</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
-            <form method="POST" action="{{ url_for('main.submit_quiz') }}" id="submit-form">
-                <button type="button" class="submit-quiz-btn" onclick="confirmSubmit()">
-                    <i class="bi bi-send"></i> NỘP BÀI
+              <div class="dethi-vn__nav">
+                {% if not loop.first %}
+                <button class="dethi-vn__btn dethi-vn__btn--prev prev-question">
+                  ← Câu trước
                 </button>
+                {% endif %} {% if not loop.last %}
+                <button class="dethi-vn__btn dethi-vn__btn--next next-question">
+                  Câu sau →
+                </button>
+                {% else %}
+                <button
+                  class="dethi-vn__btn dethi-vn__btn--submit"
+                  onclick="confirmSubmit()"
+                >
+                  Hoàn thành
+                </button>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </main>
+
+        <!-- Desktop Sidebar -->
+        <aside class="dethi-vn__sidebar">
+          <div class="dethi-vn__sidebar-section">
+            <div class="dethi-vn__stat">
+              <div class="dethi-vn__sidebar-title">Đã làm</div>
+              <div class="dethi-vn__stat-value">
+                <span id="answered-count-desktop"
+                  >{{ answered_questions|length }}</span
+                >/{{ questions|length }}
+              </div>
+            </div>
+          </div>
+
+          <div class="dethi-vn__sidebar-section">
+            <div class="dethi-vn__sidebar-title">Mục lục câu hỏi</div>
+            <div class="dethi-vn__grid" id="question-navigator-desktop">
+              {% for question in questions %}
+              <div
+                class="dethi-vn__grid-item {% if loop.first %}current{% endif %} {% if question.id in answered_questions %}answered{% endif %}"
+                data-question-index="{{ loop.index }}"
+                onclick="goToQuestion({{ loop.index }})"
+              >
+                {{ loop.index }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <form
+            method="POST"
+            action="{{ url_for('main.submit_quiz') }}"
+            id="submit-form"
+          >
+            <button
+              type="button"
+              class="dethi-vn__submit-btn"
+              onclick="confirmSubmit()"
+            >
+              Nộp bài
+            </button>
+          </form>
+        </aside>
+      </div>
+
+      <!-- Mobile Modal (Full Screen) -->
+      <div
+        class="dethi-vn__modal-overlay"
+        id="modal-overlay"
+        onclick="closeModal(event)"
+      >
+        <div class="dethi-vn__modal" onclick="event.stopPropagation()">
+          <div class="dethi-vn__modal-header">
+            <h3 class="dethi-vn__modal-title">Mục lục câu hỏi</h3>
+            <button class="dethi-vn__modal-close" onclick="closeModal()">
+              ✕
+            </button>
+          </div>
+
+          <div class="dethi-vn__modal-body">
+            <div class="dethi-vn__sidebar-section">
+              <div class="dethi-vn__stat">
+                <div class="dethi-vn__sidebar-title">Đã làm</div>
+                <div class="dethi-vn__stat-value">
+                  <span id="answered-count-mobile"
+                    >{{ answered_questions|length }}</span
+                  >/{{ questions|length }}
+                </div>
+              </div>
+            </div>
+
+            <div class="dethi-vn__sidebar-section">
+              <div class="dethi-vn__grid" id="question-navigator-mobile">
+                {% for question in questions %}
+                <div
+                  class="dethi-vn__grid-item {% if loop.first %}current{% endif %} {% if question.id in answered_questions %}answered{% endif %}"
+                  data-question-index="{{ loop.index }}"
+                  onclick="goToQuestion({{ loop.index }}); closeModal();"
+                >
+                  {{ loop.index }}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <form
+              method="POST"
+              action="{{ url_for('main.submit_quiz') }}"
+              id="submit-form-mobile"
+            >
+              <button
+                type="button"
+                class="dethi-vn__submit-btn"
+                onclick="confirmSubmit()"
+              >
+                Nộp bài
+              </button>
             </form>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-{% endblock %}
+    <script>
+      // ==================== GLOBAL VARIABLES ====================
+      let currentQuestionIndex = 1;
+      const totalQuestions = {{ questions|length }};
+      let remainingSeconds = {{ remaining_seconds }};
+      let answeredQuestions = new Set({{ answered_questions|list|tojson }});
 
-{% block extra_js %}
-<script>
-// ==================== GLOBAL VARIABLES ====================
-let currentQuestionIndex = 1;
-const totalQuestions = {{ questions|length }};
-let remainingSeconds = {{ remaining_seconds }};
-let answeredQuestions = new Set({{ answered_questions|list|tojson }});
+      // ==================== TIMER ====================
+      function updateTimer() {
+          if (remainingSeconds <= 0) {
+              alert('⏰ Hết thời gian! Bài thi sẽ được nộp tự động.');
+              document.getElementById('submit-form').submit();
+              return;
+          }
 
-// ==================== TIMER ====================
-const timerDisplay = document.getElementById('timer');
+          const minutes = Math.floor(remainingSeconds / 60);
+          const seconds = remainingSeconds % 60;
+          const timeStr = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-function updateTimer() {
-    if (remainingSeconds <= 0) {
-        alert('⏰ Hết thời gian làm bài! Bài thi sẽ được nộp tự động.');
-        document.getElementById('submit-form').submit();
-        return;
-    }
+          const timerHeader = document.getElementById('timer-header');
+          const timerSidebar = document.getElementById('timer-sidebar');
 
-    const minutes = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds % 60;
-    
-    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    
-    // Đổi màu warning/danger
-    if (remainingSeconds <= 60) {
-        timerDisplay.classList.add('danger');
-    } else if (remainingSeconds <= 300) {
-        timerDisplay.classList.add('warning');
-    }
-    
-    remainingSeconds--;
-    setTimeout(updateTimer, 1000);
-}
+          timerHeader.textContent = timeStr;
+          if (timerSidebar) timerSidebar.textContent = timeStr;
 
-updateTimer();
+          // Warnings
+          if (remainingSeconds <= 60) {
+              timerHeader.classList.add('danger');
+              if (timerSidebar) timerSidebar.classList.add('danger');
+          } else if (remainingSeconds <= 300) {
+              timerHeader.classList.add('warning');
+              if (timerSidebar) timerSidebar.classList.add('warning');
+          }
 
-// ==================== ANSWER SELECTION ====================
-document.querySelectorAll('.answer-option').forEach(option => {
-    option.addEventListener('click', function() {
-        const radio = this.querySelector('input[type="radio"]');
-        const questionId = parseInt(this.dataset.questionId);
-        const answerId = parseInt(this.dataset.answerId);
-        
-        // Chọn radio
-        radio.checked = true;
-        
-        // Highlight selected
-        this.closest('.answers-wrapper').querySelectorAll('.answer-option').forEach(opt => {
-            opt.classList.remove('selected');
-        });
-        this.classList.add('selected');
-        
-        // Lưu câu trả lời (AJAX)
-        saveAnswer(questionId, answerId);
-    });
-});
+          remainingSeconds--;
+          setTimeout(updateTimer, 1000);
+      }
 
-// ==================== SAVE ANSWER (AJAX) ====================
-function saveAnswer(questionId, answerId) {
-    fetch('{{ url_for("main.save_answer") }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            question_id: questionId,
-            answer_id: answerId
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Cập nhật UI
-            answeredQuestions.add(questionId);
-            updateAnsweredCount();
-            updateQuestionNavigator();
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
+      updateTimer();
 
-// ==================== UPDATE ANSWERED COUNT ====================
-function updateAnsweredCount() {
-    document.getElementById('answered-count').textContent = answeredQuestions.size;
-}
+      // ==================== ANSWER SELECTION ====================
+      document.querySelectorAll('.answer-option').forEach(option => {
+          option.addEventListener('click', function() {
+              const radio = this.querySelector('input[type="radio"]');
+              const questionId = parseInt(this.dataset.questionId);
+              const answerId = parseInt(this.dataset.answerId);
 
-// ==================== UPDATE QUESTION NAVIGATOR ====================
-function updateQuestionNavigator() {
-    document.querySelectorAll('.question-block').forEach((block, index) => {
-        const questionId = parseInt(block.dataset.questionId);
-        const navBtn = document.querySelector(`.question-number[data-question-index="${index + 1}"]`);
-        
-        if (answeredQuestions.has(questionId)) {
-            navBtn.classList.add('answered');
-        }
-    });
-}
+              radio.checked = true;
 
-// ==================== NAVIGATION ====================
-function goToQuestion(index) {
-    currentQuestionIndex = index;
-    
-    // Hide all questions
-    document.querySelectorAll('.question-block').forEach(block => {
-        block.classList.add('d-none');
-        block.classList.remove('active');
-    });
-    
-    // Show target question
-    const targetBlock = document.querySelector(`.question-block[data-question-index="${index}"]`);
-    targetBlock.classList.remove('d-none');
-    targetBlock.classList.add('active');
-    
-    // Update navigator
-    document.querySelectorAll('.question-number').forEach(num => {
-        num.classList.remove('current');
-    });
-    document.querySelector(`.question-number[data-question-index="${index}"]`).classList.add('current');
-    
-    // Update header
-    document.getElementById('current-question-num').textContent = index;
-    
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+              this.closest('.answers-wrapper').querySelectorAll('.answer-option').forEach(opt => {
+                  opt.classList.remove('selected');
+              });
+              this.classList.add('selected');
 
-// Prev/Next buttons
-document.querySelectorAll('.prev-question').forEach(btn => {
-    btn.addEventListener('click', function() {
-        if (currentQuestionIndex > 1) {
-            goToQuestion(currentQuestionIndex - 1);
-        }
-    });
-});
+              saveAnswer(questionId, answerId);
+          });
+      });
 
-document.querySelectorAll('.next-question').forEach(btn => {
-    btn.addEventListener('click', function() {
-        if (currentQuestionIndex < totalQuestions) {
-            goToQuestion(currentQuestionIndex + 1);
-        }
-    });
-});
+      // ==================== SAVE ANSWER ====================
+      function saveAnswer(questionId, answerId) {
+          fetch('{{ url_for("main.save_answer") }}', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  question_id: questionId,
+                  answer_id: answerId
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  answeredQuestions.add(questionId);
+                  updateAnsweredCount();
+                  updateQuestionNavigator();
+              }
+          })
+          .catch(error => console.error('Error:', error));
+      }
 
-// ==================== CONFIRM SUBMIT ====================
-function confirmSubmit() {
-    const unansweredCount = totalQuestions - answeredQuestions.size;
+      // ==================== UPDATE UI ====================
+      function updateAnsweredCount() {
+          const count = answeredQuestions.size;
+          const desktop = document.getElementById('answered-count-desktop');
+          const mobile = document.getElementById('answered-count-mobile');
+          const topbar = document.getElementById('answered-count-topbar');
+          if (desktop) desktop.textContent = count;
+          if (mobile) mobile.textContent = count;
+          if (topbar) topbar.textContent = count;
+      }
 
-    if (unansweredCount > 0) {
-        alert(`⚠️ Bạn còn ${unansweredCount} câu chưa trả lời.`);
-        return;
-    }
+      function updateQuestionNavigator() {
+          document.querySelectorAll('.question-block').forEach((block, index) => {
+              const questionId = parseInt(block.dataset.questionId);
+              const navBtns = document.querySelectorAll(`.dethi-vn__grid-item[data-question-index="${index + 1}"]`);
 
-    if (confirm('✅ Bạn có chắc chắn muốn nộp bài không?')) {
-        document.getElementById('submit-form').submit();
-    }
-}
-// ==================== AUTO SUBMIT WHEN TIME'S UP ====================
-setTimeout(() => {
-    if (remainingSeconds <= 0) {
-        document.getElementById('submit-form').submit();
-    }
-}, remainingSeconds * 1000);
-</script>
-{% endblock %}
+              if (answeredQuestions.has(questionId)) {
+                  navBtns.forEach(btn => btn.classList.add('answered'));
+              }
+          });
+      }
+
+      // ==================== NAVIGATION ====================
+      function goToQuestion(index) {
+          currentQuestionIndex = index;
+
+          document.querySelectorAll('.question-block').forEach(block => {
+              block.classList.add('d-none');
+              block.classList.remove('active');
+          });
+
+          const targetBlock = document.querySelector(`.question-block[data-question-index="${index}"]`);
+          targetBlock.classList.remove('d-none');
+          targetBlock.classList.add('active');
+
+          document.querySelectorAll('.dethi-vn__grid-item').forEach(num => {
+              num.classList.remove('current');
+          });
+          document.querySelectorAll(`.dethi-vn__grid-item[data-question-index="${index}"]`).forEach(num => {
+              num.classList.add('current');
+          });
+
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Prev/Next buttons
+      document.querySelectorAll('.prev-question').forEach(btn => {
+          btn.addEventListener('click', function() {
+              if (currentQuestionIndex > 1) {
+                  goToQuestion(currentQuestionIndex - 1);
+              }
+          });
+      });
+
+      document.querySelectorAll('.next-question').forEach(btn => {
+          btn.addEventListener('click', function() {
+              if (currentQuestionIndex < totalQuestions) {
+                  goToQuestion(currentQuestionIndex + 1);
+              }
+          });
+      });
+
+      // ==================== MODAL ====================
+      function toggleModal() {
+          const overlay = document.getElementById('modal-overlay');
+          overlay.classList.toggle('active');
+      }
+
+      function closeModal(event) {
+          if (!event || event.target === event.currentTarget) {
+              document.getElementById('modal-overlay').classList.remove('active');
+          }
+      }
+
+      // ==================== CONFIRM SUBMIT ====================
+      function confirmSubmit() {
+          const unansweredCount = totalQuestions - answeredQuestions.size;
+
+          if (unansweredCount > 0) {
+              if (!confirm(`⚠️ Bạn còn ${unansweredCount} câu chưa trả lời. Vẫn muốn nộp bài?`)) {
+                  return;
+              }
+          }
+
+          if (confirm('✅ Bạn có chắc chắn muốn nộp bài?')) {
+              document.getElementById('submit-form').submit();
+          }
+      }
+
+      // ==================== AUTO SUBMIT ====================
+      setTimeout(() => {
+          if (remainingSeconds <= 0) {
+              document.getElementById('submit-form').submit();
+          }
+      }, remainingSeconds * 1000);
+
+      // ==================== PREVENT BACK NAVIGATION (BẢO MẬT) ====================
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+          history.pushState(null, null, location.href);
+      };
+
+      // ==================== PREVENT PAGE RELOAD/CLOSE ====================
+      window.addEventListener('beforeunload', function (e) {
+          e.preventDefault();
+          e.returnValue = '';
+          return '';
+      });
+
+      // ==================== DISABLE RIGHT CLICK & F12 ====================
+      document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+      });
+
+      document.addEventListener('keydown', function(e) {
+          // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+          if (e.keyCode === 123 ||
+              (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+              (e.ctrlKey && e.keyCode === 85)) {
+              e.preventDefault();
+              return false;
+          }
+      });
+    </script>
+  </body>
+</html>
